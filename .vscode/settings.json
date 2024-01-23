@@ -1,2 +1,103 @@
 {
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": false,
+
+  "todohighlight.defaultStyle": {
+    "color": "default",
+    "backgroundColor": "none",
+    "overviewRulerColor": "none",
+    "border": "none",
+    "borderRadius": "2px",
+    "isWholeLine": false
+    //other styling properties goes here ...
+  },
+  "todohighlight.keywords": [
+    {
+      "text": "// todo",
+      "color": "white",
+      "backgroundColor": "#f59e0b",
+      "borderRadius": "3px",
+      "isWholeLine": false
+    },
+    {
+      "text": "// INFO", //azul
+      "color": "white",
+      "isWholeLine": false,
+      "backgroundColor": "#38bdf8",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// NOTE",
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#a3e635",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "Console",
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#a3e635",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// FIX", //Morado
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "red",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// QUESTION",
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#c084fc",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// REFACTOR",
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#f472b6",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// Brainstorm",
+      "color": "#ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#2dd4bf",
+      "borderRadius": "2px"
+    },
+    {
+      "text": "// PROPTYPES",
+      "color": "##ffffff",
+      "isWholeLine": false,
+      "backgroundColor": "#7dd3fc",
+      "borderRadius": "2px"
+    }
+  ],
+  "todohighlight.include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.html",
+    "**/*.php",
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "todohighlight.exclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map",
+    "**/.next/**"
+  ],
+  "todohighlight.maxFilesForSearch": 5120,
+  "todohighlight.toggleURI": false
 }

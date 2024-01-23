@@ -8,13 +8,13 @@ import {
   MdLock,
   MdOutlineShoppingCart,
 } from "react-icons/md";
+import { FaStoreAlt } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
-// Admin Imports
 import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
-import RTL from "views/admin/rtl";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -23,18 +23,25 @@ function Testcomp() {
 }
 const routes = [
   {
+    name: "ユーザー",
+    layout: "/admin",
+    path: "/users",
+    icon: <Icon as={FaUsers} width="20px" height="20px" color="inherit" />,
+    component: Testcomp,
+  },
+  {
+    name: "店舗",
+    layout: "/admin",
+    path: "/stores",
+    icon: <Icon as={FaStoreAlt} width="20px" height="20px" color="inherit" />,
+    component: Testcomp,
+  },
+  {
     name: "Main Dashboard",
     layout: "/admin",
     path: "/default",
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: MainDashboard,
-  },
-  {
-    name: "Text",
-    layout: "/admin",
-    path: "/test",
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
-    component: Testcomp,
   },
   {
     name: "NFT Marketplace",
@@ -71,13 +78,6 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
     component: SignInCentered,
-  },
-  {
-    name: "RTL Admin",
-    layout: "/rtl",
-    path: "/rtl-default",
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
-    component: RTL,
   },
 ];
 
