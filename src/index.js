@@ -9,7 +9,19 @@ import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 //General notes: For instance, only and only WebSpace users are going to use the page.
 //The inventory tracking application is going to be done later.
+//TODO well, doing:
 
+//-----Hq page:
+//Examinar como se implementa el responsive grid en HorizonUI. (NFTS)
+//Tackle the general layout of the page with a responsive grid
+//Table of all headquarters: Table, List, Pagination, button group, SpeedDial.
+
+// HeadQuarter code, HeadQuarterName, email, disabled, createdBy, CreatedAt, ModifiedBy, ModifiedAt.
+// Relevant variables: HqName, HqCode, email, disabled.
+// Fade transition!!!! this will be awesome!
+//
+//
+//.log()
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <React.StrictMode>
@@ -28,20 +40,68 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// Refactor: Use custom fetcherHooks to extract data from everywhere.
+//IDEA Use custom fetcherHooks to extract data from everywhere.
 //--------------------------------DOING-----------------------------
+// Question: Peticiones de API.
+//-------API de 本部:
+
+//one that returns all results of headquarters, and only their relevant data contained in each result.
+//Parameters
+// 1. page, numResults: 2 parameters that indicate pagination.
+//    Example: (page:1, results:10) should return the first 10 headquarters.
+//    Example 2: (page:3, results:4) should return the 9th, 10th, 11th and 12th headquarters in the DB.
+//2. optional parameters:
+// a. a global search string that finds matched results accross all columns
+// b. filtering options, object for making detailed search operations for each field. (fields are not always provided)
+
+//one that returns the detailed data of a single headquarter, based on the headquarterId.
+
+//one for CREATING a new headquarter
+//one for UPDATING a new headquarter
+//one for DELETING an existing headquarter.
+
+//API de 店舗
+
+//one that returns all available stores. (with only the relevant information)
+//1. page, numResults (for pagination, explained before)
+//Optional parameters.
+//a. a global search string that finds matched results accross all columns of Stores table.
+//b. filtering parameters for detailed search implementation. (object)
+
+//one that returns the details of a single store.
+
+//one for CREATING a new store
+//one for UPDATING a new store
+//one for DELETING an existing store.
+
+//-------API de ユーザー
+//one that returns all users. (only the relevant information)
+//Parameters:
+//1. page, numResults (for pagiunation, explained before)
+//2. optional parameters:
+// a. a global search string that finds matching results accross all columns
+// b. filter parameters. (object)
+
+//one that returns all details of a single user.
+//one for CREATING a new user
+//one for UPDATING a new user
+//one for DELETING an existing user.
+
 // Todo: Unas tablas con datos falsos. Luego ordenas el routing.
 //Datos relevantes de "tiendas":
 
+// Brainstorm: Custom Hook que obtenga datos relevantes de. Users. Hqs.
+//Query keys: userId, StoreCd, y por supuesto storeCd. Los datos ya deberían estar en el cache.
 //UserStores: UserId, HqCd, StoreCd, CreatedBy, CreatedAt.(?)
 
 //Stores: StoreCd, HqCd, StoreName, email, ftpUser, ftpPass, Disabled, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt.
-//Datos que quiero ver: StoreCd, StoreName, HqCd, email, ftpUser,
-
+//Ordered: StoreCd, StoreName, HqCd, email
+// TODO Reemplazar el copyright (puede que no sea correcto, pero nadie nos va a delatar)
 // TODO  Hacer una lista de tiendas
 // Todo organizar los datos de Stores por relevancia.
 // Todo hacer un mockup peque de las tiendas.
-// Todo hacer magia con Chakra
+// Todo hacer un esqueleto de Horizon, destinado a la página.
+// Todo que cobre vida con magia negra de Chakra y Horizon.
 
 //-------------------------------------------------------------
 
@@ -55,7 +115,8 @@ ReactDOM.render(
 //--------------------HEADQUARTERS
 
 //--------------------STORES
-//  // TODO  Hacer una lista de tiendas
+//datos de una tienda: StoreCd, HqCd, StoreName, email, ftpUser, FtpPass, Disabled, CreatedBy, CreatedAt, ModifiedBy,
+// TODO  Hacer una lista de tiendas
 // Todo organizar los datos de Stores por relevancia.
 // Todo hacer un mockup peque de las tiendas.
 // Todo hacer magia con Chakra
@@ -68,10 +129,26 @@ ReactDOM.render(
 // Info: Al buscar una tienda, queremos ver:
 //información de registro, detalles de la tienda, Información de billing, y datos (?)
 
+// NOTE: funcionalidades de MOS.
+//Se pueden buscar las tiendas 「移動中」　「停止中」
+//El botón de búsqueda es demasiado. El fetch debería ser automático. Piensa, al entrar a la página "/stores", qué es lo que el usuario quiere ver?
+//Las tiendasabstracting pueden ser visualizadas en:
+// a. Una lista bonita. Un elemento de la lista nos redirecciona a:店舗情報
+// b. Una tabla detallada. (la tabla probablemente es reduntante.) Un elemento de la tabla nos redirecciona a:店舗情報 (redundance!)
+
+//Store details page(?): It shows even less information than the ugly table.
+
+//Store details page (actions available)
+//Redirect to comany's information.
+//Redirect to aggregation data. (earnings, and so on...)
+// Edit page.
+
 //--------------------USERS
-// Brainstorm // TODO Hacer una lista de usuarios
-// Brainstorm Hacer una lista de los detalles de un usuario.
-// Info: Registrar a partir de: userId, loginId, passWord, username, observations (備考), group, companyName, email, disabled.
+// Brainstorm
+//Hacer una lista de usuarios
+// Hacer una lista de los detalles de un usuario.
+// Info: Deseos de Kawamura
+//Registrar a partir de: userId, loginId, passWord, username, observations (備考), group, companyName, email, disabled.
 // Info: Editar un usuario correspondiente con la técnica de Schmedtmann. CreateEdit...
 // Question: Qué es group en este caso?
 
@@ -159,7 +236,7 @@ ReactDOM.render(
 // settings 棚卸し先付１０日、過去４５日、ゴンドラ棚段の表示の有無 (The app is not for the user at the moment)
 
 // Note: What are my proposals?
-// Aim: Fast visualization of what to do next. Because I love to tackle TODO lists in order.
-// Solution: Maybe adding quick actions in the dashboard, with undone tasks.
-//(Maybe sending bills, maybe checking upcoming ending subscriptions.
+// Fast visualization of what to do next. Because I love to tackle TODO lists in order.
+// Maybe adding quick actions in the dashboard, with undone tasks.
+//(Maybe sending automatic bills, maybe checking upcoming ending subscriptions.
 // Maybe exporting a report of all the users, made just for WebSpace)

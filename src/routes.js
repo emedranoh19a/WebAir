@@ -18,6 +18,7 @@ import DataTables from "views/admin/dataTables";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
+import AirStores from "views/admin/AirStores";
 function Testcomp() {
   return <h1>I am the test</h1>;
 }
@@ -34,7 +35,7 @@ const routes = [
     layout: "/admin",
     path: "/stores",
     icon: <Icon as={FaStoreAlt} width="20px" height="20px" color="inherit" />,
-    component: Testcomp,
+    component: AirStores,
   },
   {
     name: "Main Dashboard",
