@@ -9,7 +9,17 @@ import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 //General notes: For instance, only and only WebSpace users are going to use the page.
 //The inventory tracking application is going to be done later.
-//TODO well, doing:
+//TODO sketch some wireframes from the Horizon Pro version. Check what you can make. See how it changes, etc.
+// Info: algunos componentes que quiero usar (de la versión PRO):
+
+//Main Dashboard:
+// Credit balance with  3 grouped relevant stats.
+// Small + button at the very top-right
+// Me gustan los cuatro botones neumorph de la derecha. Arriba de "Your transactions".
+
+//Your transfers
+
+//TODO Refactor the styles for the relevant components. This will be for concentrating into the logic, rather than the styles.
 
 //-----Hq page:
 //Examinar como se implementa el responsive grid en HorizonUI. (NFTS)

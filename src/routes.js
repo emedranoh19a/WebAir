@@ -7,7 +7,9 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdFactory,
 } from "react-icons/md";
+
 import { FaStoreAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 
@@ -19,16 +21,14 @@ import DataTables from "views/admin/dataTables";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 import AirStores from "views/admin/AirStores";
-function Testcomp() {
-  return <h1>I am the test</h1>;
-}
+import AirHeadquarters from "views/admin/AirHeadquarters";
 const routes = [
   {
-    name: "ユーザー",
+    name: "本部",
     layout: "/admin",
-    path: "/users",
-    icon: <Icon as={FaUsers} width="20px" height="20px" color="inherit" />,
-    component: Testcomp,
+    path: "/headquarters",
+    icon: <Icon as={MdFactory} width="20px" height="20px" color="inherit" />,
+    component: AirHeadquarters,
   },
   {
     name: "店舗",
@@ -36,6 +36,13 @@ const routes = [
     path: "/stores",
     icon: <Icon as={FaStoreAlt} width="20px" height="20px" color="inherit" />,
     component: AirStores,
+  },
+  {
+    name: "ユーザー",
+    layout: "/admin",
+    path: "/users",
+    icon: <Icon as={FaUsers} width="20px" height="20px" color="inherit" />,
+    component: () => <h1>I am the Users page</h1>,
   },
   {
     name: "Main Dashboard",

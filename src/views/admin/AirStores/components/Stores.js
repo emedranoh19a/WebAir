@@ -1,5 +1,6 @@
 import {
   Flex,
+  Skeleton,
   Table,
   Tbody,
   Td,
@@ -52,25 +53,39 @@ export default function Stores(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
 
-  // TODO descomponer la tabla en componentes pequeños.
-  //Decomposed into constants due to hooks usage and prop-drilling avoids.
-  function CardTitle() {
-    return (
-      <Flex px="25px" justify="space-between" mb="20px" align="center">
+  //Decomposed into internal components due to hooks usage and prop-drilling avoids.
+  function CardHeader() {
+    function StyledText({ children }) {
+      return (
         <Text
           color={textColor}
           fontSize="22px"
           fontWeight="700"
           lineHeight="100%"
         >
+          {children}
+        </Text>
+      );
+    }
+    function StyledContainer({ children }) {
+      return (
+        <Flex px="25px" justify="space-between" mb="20px" align="center">
+          {children}
+        </Flex>
+      );
+    }
+
+    return (
+      <StyledContainer>
+        <StyledText>
           {/* //TODO conditional renders. 
           //If there is a relevant url param: then display something else: ""
           //If there is not url Params: Render "all the stores."
           */}
-          店舗情報
-        </Text>
+          全ての店舗または特定の店舗のリスト
+        </StyledText>
         <Menu />
-      </Flex>
+      </StyledContainer>
     );
   }
   function TableHeadItem({ column }) {
@@ -108,6 +123,7 @@ export default function Stores(props) {
     );
   }
   function TableBodyItem({ cell }) {
+    //TODO erase the console log
     console.log(cell);
 
     // Info: Defining conditional styles and unit renders for each body cell.
@@ -173,13 +189,13 @@ export default function Stores(props) {
       px="0px"
       overflowX={{ sm: "scroll", lg: "hidden" }}
     >
-      <CardTitle />
-      {/* // note: extracted from react-table hook */}
-      <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
-        <TableHead />
-        {/* // note: getTableBodyProps extracted from react-table hook */}
-        <TableBody />
-      </Table>
+      <CardHeader />
+      <Skeleton isLoaded={true}>
+        <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
+          <TableHead />
+          <TableBody />
+        </Table>
+      </Skeleton>
     </Card>
   );
 }

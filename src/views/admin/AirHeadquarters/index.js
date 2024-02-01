@@ -48,13 +48,14 @@ import Nft3 from "assets/img/nfts/Nft3.png";
 import Nft4 from "assets/img/nfts/Nft4.png";
 import Nft5 from "assets/img/nfts/Nft5.png";
 import Nft6 from "assets/img/nfts/Nft6.png";
-import Avatar1 from "assets/img/avatars/avatar1.png";
-import Avatar2 from "assets/img/avatars/avatar2.png";
-import Avatar3 from "assets/img/avatars/avatar3.png";
-import Avatar4 from "assets/img/avatars/avatar4.png";
+// import Avatar1 from "assets/img/avatars/avatar1.png";
+// import Avatar2 from "assets/img/avatars/avatar2.png";
+// import Avatar3 from "assets/img/avatars/avatar3.png";
+// import Avatar4 from "assets/img/avatars/avatar4.png";
 import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
-import Stores from "./components/Stores";
+
+import AllHeadquartersTable from "./components/AllHeadquartersTable";
 
 //TODO mientras puedes hacer tus propios componentes, en base a lo que ya tienes.
 // Una mejor organización de dará desyunar perdedores.
@@ -68,50 +69,50 @@ const inlineLinks = [
   { link: "#sports", label: "Sports" },
 ];
 
-const columnsData = [
-  {
-    Header: "NAME",
-    accessor: "name",
-  },
-  {
-    Header: "PROGRESS",
-    accessor: "progress",
-  },
-  {
-    Header: "QUANTITY",
-    accessor: "quantity",
-  },
-  {
-    Header: "DATE",
-    accessor: "date",
-  },
-];
-const tableData = [
-  {
-    name: "Marketplace",
-    quantity: 2458,
-    date: "12.Jan.2021",
-    progress: 75.5,
-  },
-  {
-    name: "Venus DB PRO",
-    quantity: 1485,
-    date: "21.Feb.2021",
-    progress: 35.4,
-  },
-  {
-    name: "Venus DS",
-    quantity: 1024,
-    date: "13.Mar.2021",
-    progress: 25,
-  },
-  {
-    name: "Venus 3D Asset",
-    quantity: 858,
-    date: "24.Jan.2021",
-    progress: 100,
-  },
-];
+// const columnsData = [
+//   {
+//     Header: "NAME",
+//     accessor: "name",
+//   },
+//   {
+//     Header: "PROGRESS",
+//     accessor: "progress",
+//   },
+//   {
+//     Header: "QUANTITY",
+//     accessor: "quantity",
+//   },
+//   {
+//     Header: "DATE",
+//     accessor: "date",
+//   },
+// ];
+// const tableData = [
+//   {
+//     name: "Marketplace",
+//     quantity: 2458,
+//     date: "12.Jan.2021",
+//     progress: 75.5,
+//   },
+//   {
+//     name: "Venus DB PRO",
+//     quantity: 1485,
+//     date: "21.Feb.2021",
+//     progress: 35.4,
+//   },
+//   {
+//     name: "Venus DS",
+//     quantity: 1024,
+//     date: "13.Mar.2021",
+//     progress: 25,
+//   },
+//   {
+//     name: "Venus 3D Asset",
+//     quantity: 858,
+//     date: "24.Jan.2021",
+//     progress: 100,
+//   },
+// ];
 
 function InlineLink({ link, linkLabel }) {
   const textColorBrand = useColorModeValue("brand.500", "white");
@@ -140,12 +141,12 @@ function InlineLinks({ links }) {
     </Flex>
   );
 }
-
-export default function AirStores() {
+// Info:Displays page of all the headquarters
+export default function AirHeadquarters() {
   // Chakra Color Mode
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorBrand = useColorModeValue("brand.500", "white");
+  // const textColorBrand = useColorModeValue("brand.500", "white");
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
@@ -171,13 +172,19 @@ export default function AirStores() {
               align={{ base: "start", md: "center" }}
             >
               <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-                店舗一覧
+                本部一覧
               </Text>
               <InlineLinks links={inlineLinks} />
             </Flex>
             {/* // Note: Tackle width and flex properties for responsiveness */}
             <Box w="100%">
-              <Stores columnsData={columnsData} tableData={tableData} />
+              {/* //TODO make the table for the headquarters */}
+              <AllHeadquartersTable />
+              {/* <WebAirTable
+                tableTitle="全ての本部"
+                columnDefinitions={[]}
+                tableData={[]}
+              /> */}
             </Box>
             {/* // Note: a vertical grid containing 2  */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px"></SimpleGrid>
