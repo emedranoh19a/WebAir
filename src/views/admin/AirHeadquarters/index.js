@@ -69,65 +69,20 @@ const inlineLinks = [
   { link: "#sports", label: "Sports" },
 ];
 
-// const columnsData = [
-//   {
-//     Header: "NAME",
-//     accessor: "name",
-//   },
-//   {
-//     Header: "PROGRESS",
-//     accessor: "progress",
-//   },
-//   {
-//     Header: "QUANTITY",
-//     accessor: "quantity",
-//   },
-//   {
-//     Header: "DATE",
-//     accessor: "date",
-//   },
-// ];
-// const tableData = [
-//   {
-//     name: "Marketplace",
-//     quantity: 2458,
-//     date: "12.Jan.2021",
-//     progress: 75.5,
-//   },
-//   {
-//     name: "Venus DB PRO",
-//     quantity: 1485,
-//     date: "21.Feb.2021",
-//     progress: 35.4,
-//   },
-//   {
-//     name: "Venus DS",
-//     quantity: 1024,
-//     date: "13.Mar.2021",
-//     progress: 25,
-//   },
-//   {
-//     name: "Venus 3D Asset",
-//     quantity: 858,
-//     date: "24.Jan.2021",
-//     progress: 100,
-//   },
-// ];
-
-function InlineLink({ link, linkLabel }) {
-  const textColorBrand = useColorModeValue("brand.500", "white");
-  return (
-    <Link
-      color={textColorBrand}
-      fontWeight="500"
-      me={{ base: "34px", md: "44px" }}
-      to={link}
-    >
-      {linkLabel}
-    </Link>
-  );
-}
 function InlineLinks({ links }) {
+  function InlineLink({ link, linkLabel }) {
+    const textColorBrand = useColorModeValue("brand.500", "white");
+    return (
+      <Link
+        color={textColorBrand}
+        fontWeight="500"
+        me={{ base: "34px", md: "44px" }}
+        to={link}
+      >
+        {linkLabel}
+      </Link>
+    );
+  }
   return (
     <Flex
       align="center"
@@ -144,7 +99,6 @@ function InlineLinks({ links }) {
 // Info:Displays page of all the headquarters
 export default function AirHeadquarters() {
   // Chakra Color Mode
-
   const textColor = useColorModeValue("secondaryGray.900", "white");
   // const textColorBrand = useColorModeValue("brand.500", "white");
 
@@ -235,41 +189,6 @@ export default function AirHeadquarters() {
               author="By Mark Benjamin"
               date="30s ago"
               image={Nft5}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Abstract Colors"
-              author="By Esthera Jackson"
-              date="58s ago"
-              image={Nft1}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="ETH AI Brain"
-              author="By Nick Wilson"
-              date="1m ago"
-              image={Nft2}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Swipe Circles"
-              author="By Peter Will"
-              date="1m ago"
-              image={Nft4}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Mesh Gradients "
-              author="By Will Smith"
-              date="2m ago"
-              image={Nft3}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="3D Cubes Art"
-              author="By Manny Gates"
-              date="3m ago"
-              image={Nft6}
               price="0.91 ETH"
             />
           </Card>

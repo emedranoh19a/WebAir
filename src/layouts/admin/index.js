@@ -15,19 +15,22 @@ import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
+import AirHeadquarters from "views/admin/AirHeadquarters";
 
 // Custom Chakra theme
 // Info: Admin layout. This is rendered in the index.js (inside a router)
-export default function Dashboard(props) {
-  const { ...rest } = props;
+export default function AppLayout({ children, ...rest }) {
+  // const { children, ...rest } = props;
+  console.log("App Layout props");
+  console.log(rest);
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
-  const getRoute = () => {
+  function getRoute() {
     return window.location.pathname !== "/admin/full-screen-maps";
-  };
-  const getActiveRoute = (routes) => {
+  }
+  function getActiveRoute(routes) {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -49,8 +52,8 @@ export default function Dashboard(props) {
       }
     }
     return activeRoute;
-  };
-  const getActiveNavbar = (routes) => {
+  }
+  function getActiveNavbar(routes) {
     let activeNavbar = false;
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -72,8 +75,8 @@ export default function Dashboard(props) {
       }
     }
     return activeNavbar;
-  };
-  const getActiveNavbarText = (routes) => {
+  }
+  function getActiveNavbarText(routes) {
     let activeNavbar = false;
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -95,35 +98,34 @@ export default function Dashboard(props) {
       }
     }
     return activeNavbar;
-  };
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+  }
+  function getRoutes(routes) {
+    // Info this handles the switch of the components
+    return routes.map((route, key) => {
+      const { layout, path, component, collapse, items } = route;
+      if (layout === "/admin") {
         return (
           <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
+            //TODO deshacerse del layout
+            path={layout + path}
+            component={component}
             key={key}
           />
         );
       }
-      if (prop.collapse) {
-        return getRoutes(prop.items);
+      if (collapse) {
+        return getRoutes(items);
       }
-      if (prop.category) {
-        return getRoutes(prop.items);
+      if (route.items) {
+        return getRoutes(route.items);
       } else {
         return null;
       }
     });
-  };
+  }
   document.documentElement.dir = "ltr";
   const { onOpen } = useDisclosure();
   document.documentElement.dir = "ltr";
-  // TODO Examinar el componente Sidebar, y cómo son iteradas las rutas.
-  //TODO Examinar el Navbar.
-  // TODO Investigar get route y get routes. Si logras entenderlo, adelante y configura las rutas actuales.
-  //TODO Pero si no lo entiendes, recuperar en una anidación manual las rutas. Tomar de base a Jonas Schmedtmann.
 
   return (
     <Box>
@@ -171,10 +173,26 @@ export default function Dashboard(props) {
                 minH="100vh"
                 pt="50px"
               >
-                <Switch>
-                  {getRoutes(routes)}
+                {/* <Switch>
+                  {/* <Route path="/headquarters" component={AirHeadquarters} /> */}
+                {/* // Info This is the Outlet */}
+                {/* {getRoutes(routes)} */}
+                {/* {routes.map(() => (
+                    <Route
+                      path="/dashboard"
+                      component={AirHeadquarters}
+                      key={index}
+                    />
+                  ))}
+                  <Route
+                    path="/headquarters"
+                    component={AirHeadquarters}
+                    key={key}
+                  /> 
                   <Redirect from="/" to="/admin/default" />
-                </Switch>
+                </Switch> */}
+
+                {children}
               </Box>
             ) : null}
             <Box>

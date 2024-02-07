@@ -123,9 +123,6 @@ export default function Stores(props) {
     );
   }
   function TableBodyItem({ cell }) {
-    //TODO erase the console log
-    console.log(cell);
-
     // Info: Defining conditional styles and unit renders for each body cell.
     let justifyContent = "start";
     let unit = "";

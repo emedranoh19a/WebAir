@@ -13,7 +13,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import Content from "components/sidebar/components/Content";
+import SidebarContent from "components/sidebar/components/Content";
 import {
   renderThumb,
   renderTrack,
@@ -48,7 +48,7 @@ function Sidebar(props) {
         transition="0.2s linear"
         w="300px"
         h="100vh"
-        m="0px" // TODO // Refactor is this margin overriding something?
+        m="0px"
         minH="100%"
         overflowX="hidden"
         boxShadow={shadow}
@@ -59,7 +59,7 @@ function Sidebar(props) {
           renderThumbVertical={renderThumb}
           renderView={renderView}
         >
-          <Content routes={routes} />
+          <SidebarContent routes={routes} />
           {/* //TODO Check how this Content component works */}
         </Scrollbars>
       </Box>
@@ -115,7 +115,7 @@ export function SidebarResponsive({ routes }) {
               renderThumbVertical={renderThumb}
               renderView={renderView}
             >
-              <Content routes={routes} />
+              <SidebarContent routes={routes} />
             </Scrollbars>
           </DrawerBody>
         </DrawerContent>

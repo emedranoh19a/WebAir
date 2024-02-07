@@ -14,6 +14,9 @@ import React, { useState, useEffect } from "react";
 import AdminNavbarLinks from "components/navbar/NavbarLinksAdmin";
 
 export default function AdminNavbar(props) {
+  //TODO delete the console log
+  console.log("Admin navbar props");
+  console.log(props);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {

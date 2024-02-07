@@ -44,7 +44,20 @@ const routes = [
     path: "/stores",
     icon: <Icon as={FaStoreAlt} width="20px" height="20px" color="inherit" />,
     component: AirStores,
+    // collapse: "aaa",
+    items: [
+      {
+        name: "店舗a",
+        layout: "/admin",
+        path: "/stores/a",
+        icon: (
+          <Icon as={FaStoreAlt} width="20px" height="20px" color="inherit" />
+        ),
+        component: MainDashboard,
+      },
+    ],
   },
+
   {
     name: "ユーザー",
     layout: "/admin",
@@ -59,6 +72,8 @@ const routes = [
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: MainDashboard,
   },
+  //items, categories are optional, but must be together.
+  //items contains an array of more routes
   {
     name: "NFT Marketplace",
     layout: "/admin",

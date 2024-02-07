@@ -5,15 +5,15 @@ import React from "react";
 export const renderTrack = ({ style, ...props }) => {
   const trackStyle = {
     position: "absolute",
+    top: 2,
+    bottom: 2,
+    right: 0,
     maxWidth: "100%",
     width: 6,
     transition: "opacity 200ms ease 0s",
     opacity: 0,
     background: "transparent",
-    bottom: 2,
-    top: 2,
     borderRadius: 3,
-    right: 0,
   };
   return <div style={{ ...style, ...trackStyle }} {...props} />;
 };

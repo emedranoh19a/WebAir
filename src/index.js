@@ -1,16 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "assets/css/App.css";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import AuthLayout from "layouts/auth";
-import AdminLayout from "layouts/admin";
+import {
+  BrowserRouter,
+  HashRouter,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+
+import { CompatRouter } from "react-router-dom-v5-compat";
+import AppLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
+import AirHeadquarters from "views/admin/AirHeadquarters";
+import AirStores from "views/admin/AirStores";
+
+import MainDashboard from "views/admin/default";
+import AirHeadquarter from "views/admin/AirHeadquarter";
+
 //General notes: For instance, only and only WebSpace users are going to use the page.
 //The inventory tracking application is going to be done later.
-//TODO sketch some wireframes from the Horizon Pro version. Check what you can make. See how it changes, etc.
-// Info: algunos componentes que quiero usar (de la versión PRO):
 
 //Main Dashboard:
 // Credit balance with  3 grouped relevant stats.
@@ -32,23 +43,49 @@ import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 //
 //
 //.log()
+// TODO implement client side pagination with react table.
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <React.StrictMode>
       <ThemeEditorProvider>
-        <HashRouter>
-          <Switch>
-            <Route path={`/auth`} component={AuthLayout} />
-            <Route path={`/admin`} component={AdminLayout} />
-
-            <Redirect from="/" to="/admin" />
-          </Switch>
-        </HashRouter>
+        <BrowserRouter>
+          <CompatRouter>
+            <AppLayout>
+              <Switch>
+                <Route path="/headquarters" component={AirHeadquarters} />
+                <Route path="/headquarters/:hqId" component={AirHeadquarter} />
+                <Route path="/stores" component={AirStores} />
+                <Route
+                  path="/users"
+                  component={() => <h1>I am the Users page</h1>}
+                />
+                <Redirect from="/" to="/headquarters" />
+              </Switch>
+            </AppLayout>
+          </CompatRouter>
+          {/* <AppLayout>
+            <Switch>
+              <Route path="/headquarters" component={AirHeadquarters} />
+              <Redirect from="/" to="/admin/default" />
+            </Switch>
+          </AppLayout> */}
+        </BrowserRouter>
       </ThemeEditorProvider>
     </React.StrictMode>
   </ChakraProvider>,
   document.getElementById("root")
 );
+
+{
+  /* <Switch>
+            <Route path={"/"} component={AppLayout} />
+            <Route path={`/auth`} component={AuthLayout} />
+            <Route path={`/admin`} component={AppLayout} />
+            {/* <Route path="/headquarters" component={AirHeadquarters} />
+            <Route path="/stores" component={AirHeadquarters} /> 
+            <Redirect from="/" to="/admin" />
+          </Switch> */
+}
 
 //IDEA Use custom fetcherHooks to extract data from everywhere.
 //--------------------------------DOING-----------------------------

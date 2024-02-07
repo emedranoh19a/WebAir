@@ -33,6 +33,7 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
+import NFTMarketplace from "views/admin/marketplace";
 
 // Custom components
 // import Banner from "views/admin/marketplace/components/Banner";
@@ -54,6 +55,8 @@ import Nft6 from "assets/img/nfts/Nft6.png";
 // import Avatar4 from "assets/img/avatars/avatar4.png";
 import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Route } from "react-router-dom/cjs/react-router-dom";
 
 // import AllHeadquartersTable from "./components/AllHeadquartersTable";
 
@@ -69,65 +72,20 @@ const inlineLinks = [
   { link: "#sports", label: "Sports" },
 ];
 
-// const columnsData = [
-//   {
-//     Header: "NAME",
-//     accessor: "name",
-//   },
-//   {
-//     Header: "PROGRESS",
-//     accessor: "progress",
-//   },
-//   {
-//     Header: "QUANTITY",
-//     accessor: "quantity",
-//   },
-//   {
-//     Header: "DATE",
-//     accessor: "date",
-//   },
-// ];
-// const tableData = [
-//   {
-//     name: "Marketplace",
-//     quantity: 2458,
-//     date: "12.Jan.2021",
-//     progress: 75.5,
-//   },
-//   {
-//     name: "Venus DB PRO",
-//     quantity: 1485,
-//     date: "21.Feb.2021",
-//     progress: 35.4,
-//   },
-//   {
-//     name: "Venus DS",
-//     quantity: 1024,
-//     date: "13.Mar.2021",
-//     progress: 25,
-//   },
-//   {
-//     name: "Venus 3D Asset",
-//     quantity: 858,
-//     date: "24.Jan.2021",
-//     progress: 100,
-//   },
-// ];
-
-function InlineLink({ link, linkLabel }) {
-  const textColorBrand = useColorModeValue("brand.500", "white");
-  return (
-    <Link
-      color={textColorBrand}
-      fontWeight="500"
-      me={{ base: "34px", md: "44px" }}
-      to={link}
-    >
-      {linkLabel}
-    </Link>
-  );
-}
 function InlineLinks({ links }) {
+  function InlineLink({ link, linkLabel }) {
+    const textColorBrand = useColorModeValue("brand.500", "white");
+    return (
+      <Link
+        color={textColorBrand}
+        fontWeight="500"
+        me={{ base: "34px", md: "44px" }}
+        to={link}
+      >
+        {linkLabel}
+      </Link>
+    );
+  }
   return (
     <Flex
       align="center"
@@ -172,13 +130,12 @@ export default function AirHeadquarter() {
               align={{ base: "start", md: "center" }}
             >
               <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-                HeadQuarter Details
+                Details of a single headquarter
               </Text>
               <InlineLinks links={inlineLinks} />
             </Flex>
             {/* // Note: Tackle width and flex properties for responsiveness */}
             <Box w="100%">
-              {/* //TODO make the table for the headquarters */}
               {/* <AllHeadquartersTable /> */}
               {/* <WebAirTable
                 tableTitle="全ての本部"
@@ -188,91 +145,7 @@ export default function AirHeadquarter() {
             </Box>
             {/* // Note: a vertical grid containing 2  */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px"></SimpleGrid>
-            <Text
-              mt="45px"
-              mb="36px"
-              color={textColor}
-              fontSize="2xl"
-              ms="24px"
-              fontWeight="700"
-            >
-              Recently Added
-            </Text>
-            <SimpleGrid
-              columns={{ base: 1, md: 3 }}
-              gap="20px"
-              mb={{ base: "20px", xl: "0px" }}
-            ></SimpleGrid>
           </Flex>
-        </Flex>
-        <Flex
-          flexDirection="column"
-          gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
-        >
-          <Card px="0px" mb="20px">
-            <TableTopCreators
-              k
-              tableData={tableDataTopCreators}
-              columnsData={tableColumnsTopCreators}
-            />
-          </Card>
-          <Card p="0px">
-            <Flex
-              align={{ sm: "flex-start", lg: "center" }}
-              justify="space-between"
-              w="100%"
-              px="22px"
-              py="18px"
-            >
-              <Text color={textColor} fontSize="xl" fontWeight="600">
-                History
-              </Text>
-              <Button variant="action">See all</Button>
-            </Flex>
-
-            <HistoryItem
-              name="Colorful Heaven"
-              author="By Mark Benjamin"
-              date="30s ago"
-              image={Nft5}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Abstract Colors"
-              author="By Esthera Jackson"
-              date="58s ago"
-              image={Nft1}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="ETH AI Brain"
-              author="By Nick Wilson"
-              date="1m ago"
-              image={Nft2}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Swipe Circles"
-              author="By Peter Will"
-              date="1m ago"
-              image={Nft4}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="Mesh Gradients "
-              author="By Will Smith"
-              date="2m ago"
-              image={Nft3}
-              price="0.91 ETH"
-            />
-            <HistoryItem
-              name="3D Cubes Art"
-              author="By Manny Gates"
-              date="3m ago"
-              image={Nft6}
-              price="0.91 ETH"
-            />
-          </Card>
         </Flex>
       </Grid>
     </Box>
