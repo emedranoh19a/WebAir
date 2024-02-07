@@ -27,16 +27,13 @@ import { IoMenuOutline } from "react-icons/io5";
 
 function Sidebar(props) {
   const { routes } = props;
-  console.log("props of Sidebar");
-  console.log(routes);
-  let variantChange = "0.2s linear";
+
   let shadow = useColorModeValue(
     "14px 17px 40px 4px rgba(112, 144, 176, 0.08)",
     "unset"
   );
   // Chakra Color Mode
   let sidebarBg = useColorModeValue("white", "navy.800");
-  let sidebarMargins = "0px";
 
   // SIDEBAR
   return (
@@ -48,10 +45,10 @@ function Sidebar(props) {
     >
       <Box
         bg={sidebarBg}
-        transition={variantChange}
+        transition="0.2s linear"
         w="300px"
         h="100vh"
-        m={sidebarMargins}
+        m="0px" // TODO // Refactor is this margin overriding something?
         minH="100%"
         overflowX="hidden"
         boxShadow={shadow}
@@ -63,6 +60,7 @@ function Sidebar(props) {
           renderView={renderView}
         >
           <Content routes={routes} />
+          {/* //TODO Check how this Content component works */}
         </Scrollbars>
       </Box>
     </Box>
@@ -70,20 +68,22 @@ function Sidebar(props) {
 }
 
 // FUNCTIONS
-export function SidebarResponsive(props) {
+// TODO Verify if the responsive version is called somewhere else.
+export function SidebarResponsive({ routes }) {
   let sidebarBackgroundColor = useColorModeValue("white", "navy.800");
   let menuColor = useColorModeValue("gray.400", "white");
   // // SIDEBAR
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const { routes } = props;
+  // const { routes } = props;
   // let isWindows = navigator.platform.startsWith("Win");
   //  BRAND
 
   return (
     <Flex display={{ sm: "flex", xl: "none" }} alignItems="center">
       <Flex ref={btnRef} w="max-content" h="max-content" onClick={onOpen}>
+        {/* This is the hamburguer icon */}
         <Icon
           as={IoMenuOutline}
           color={menuColor}

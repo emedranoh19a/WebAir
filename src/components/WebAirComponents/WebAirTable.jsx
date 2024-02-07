@@ -26,7 +26,7 @@ export default function WebAirTable({
   columnsDefinition,
   tableData,
 }) {
-  // Info: flexible by accepting column render definition
+  // Info: flexible by accepting column render definition and data.
   const columns = useMemo(() => columnsDefinition, [columnsDefinition]);
   const data = useMemo(() => tableData, [tableData]);
 

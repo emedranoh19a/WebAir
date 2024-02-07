@@ -22,6 +22,7 @@ import DataTables from "views/admin/dataTables";
 import SignInCentered from "views/auth/signIn";
 import AirStores from "views/admin/AirStores";
 import AirHeadquarters from "views/admin/AirHeadquarters";
+import AirHeadquarter from "views/admin/AirHeadquarter";
 const routes = [
   {
     name: "本部",
@@ -30,6 +31,13 @@ const routes = [
     icon: <Icon as={MdFactory} width="20px" height="20px" color="inherit" />,
     component: AirHeadquarters,
   },
+  // {
+  //   name: "本部詳細",
+  //   layout: "/admin",
+  //   path: "/headquarters/:hqId",
+  //   icon: <Icon as={MdFactory} width="20px" height="20px" color="inherit" />,
+  //   component: AirHeadquarter,
+  // },
   {
     name: "店舗",
     layout: "/admin",
