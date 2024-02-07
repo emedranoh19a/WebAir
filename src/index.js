@@ -3,13 +3,10 @@ import ReactDOM from "react-dom";
 import "assets/css/App.css";
 import {
   BrowserRouter,
-  // HashRouter,
-  // Route,
-  Switch,
-  Redirect,
+  Routes, Route
+
 } from "react-router-dom";
 
-import { CompatRoute, CompatRouter } from "react-router-dom-v5-compat";
 import AppLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
@@ -49,30 +46,26 @@ ReactDOM.render(
     <React.StrictMode>
       <ThemeEditorProvider>
         <BrowserRouter>
-          <CompatRouter>
-            <AppLayout>
-              <Switch>
-                <CompatRoute path="/headquarters" component={AirHeadquarters} />
-                <CompatRoute
-                  path="/headquarters/:hqId"
-                  component={AirHeadquarter}
-                />
-                <CompatRoute path="/stores" component={AirStores} />
-                <CompatRoute
-                  path="/users"
-                  component={() => <h1>I am the Users page</h1>}
-                />
-                {/* <Route path="/headquarters" component={AirHeadquarters} /> */}
-                {/* <Route path="/headquarters/:hqId" component={AirHeadquarter} />
+          <AppLayout>
+            <Routes>
+              <Route path="headquarters" component={AirHeadquarters} />
+              <Route path="/headquarters/:hqId" component={AirHeadquarter} />
+              <Route path="/stores" component={AirStores} />
+              <Route
+                path="/users"
+                component={() => <h1>I am the Users page</h1>}
+              />
+              {/* <Route path"/headquarters" component={AirHeadquarters} /> */}
+              {/* <Route path="/headquarters/:hqId" component={AirHeadquarter} />
                 <Route path="/stores" component={AirStores} />
                 <Route
                   path="/users"
                   component={() => <h1>I am the Users page</h1>}
                 /> */}
-                <Redirect from="/" to="/headquarters" />
-              </Switch>
-            </AppLayout>
-          </CompatRouter>
+              {/* <Redirect from="/" to="/headquarters" /> */}
+            </Routes>
+          </AppLayout>
+
           {/* <AppLayout>
             <Switch>
               <Route path="/headquarters" component={AirHeadquarters} />
@@ -92,7 +85,7 @@ ReactDOM.render(
 //             <Route path={`/auth`} component={AuthLayout} />
 //             <Route path={`/admin`} component={AppLayout} />
 //             {/* <Route path="/headquarters" component={AirHeadquarters} />
-//             <Route path="/stores" component={AirHeadquarters} /> 
+//             <Route path="/stores" component={AirHeadquarters} />
 //             <Redirect from="/" to="/admin" />
 //           </Switch> */
 // }

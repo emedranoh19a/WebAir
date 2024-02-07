@@ -25,7 +25,7 @@ import React from "react";
 // Chakra imports
 import {
   Box,
-  Button,
+  // Button,
   Flex,
   Grid,
   Link,
@@ -33,30 +33,28 @@ import {
   useColorModeValue,
   SimpleGrid,
 } from "@chakra-ui/react";
-import NFTMarketplace from "views/admin/marketplace";
+// import NFTMarketplace from "views/admin/marketplace";
 
 // Custom components
 // import Banner from "views/admin/marketplace/components/Banner";
-import TableTopCreators from "views/admin/marketplace/components/TableTopCreators";
-import HistoryItem from "views/admin/marketplace/components/HistoryItem";
+// import TableTopCreators from "views/admin/marketplace/components/TableTopCreators";
+// import HistoryItem from "views/admin/marketplace/components/HistoryItem";
 // import NFT from "components/card/NFT";
-import Card from "components/card/Card.js";
+// import Card from "components/card/Card.js";
 // import ColumnsTable from "./components/ColumnsTable";
 // Assets
-import Nft1 from "assets/img/nfts/Nft1.png";
-import Nft2 from "assets/img/nfts/Nft2.png";
-import Nft3 from "assets/img/nfts/Nft3.png";
-import Nft4 from "assets/img/nfts/Nft4.png";
-import Nft5 from "assets/img/nfts/Nft5.png";
-import Nft6 from "assets/img/nfts/Nft6.png";
+// import Nft1 from "assets/img/nfts/Nft1.png";
+// import Nft2 from "assets/img/nfts/Nft2.png";
+// import Nft3 from "assets/img/nfts/Nft3.png";
+// import Nft4 from "assets/img/nfts/Nft4.png";
+// import Nft5 from "assets/img/nfts/Nft5.png";
+// import Nft6 from "assets/img/nfts/Nft6.png";
 // import Avatar1 from "assets/img/avatars/avatar1.png";
 // import Avatar2 from "assets/img/avatars/avatar2.png";
 // import Avatar3 from "assets/img/avatars/avatar3.png";
 // import Avatar4 from "assets/img/avatars/avatar4.png";
-import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
-import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { Route } from "react-router-dom/cjs/react-router-dom";
+// import tableDataTopCreators from "views/admin/marketplace/variables/tableDataTopCreators.json";
+// import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
 
 // import AllHeadquartersTable from "./components/AllHeadquartersTable";
 

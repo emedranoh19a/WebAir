@@ -13,6 +13,7 @@ import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 // import { Redirect, Route, Switch } from "react-router-dom";
 //Note: This is used if want to create routes dinamically
 // import { CompatRoute } from "react-router-dom-v5-compat";
@@ -28,9 +29,10 @@ export default function AppLayout({ children }) {
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
-  function getRoute() {
-    return window.location.pathname !== "/admin/full-screen-maps";
-  }
+  // function getRoute() {
+  //   //TODO we have to tackle here, since we are not using layouts.
+  //   return window.location.pathname !== "/admin/full-screen-maps";
+  // }
   function getActiveRoute(routes) {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
@@ -169,37 +171,17 @@ export default function AppLayout({ children }) {
                 />
               </Box>
             </Portal>
-
-            {getRoute() ? (
-              <Box
-                mx="auto"
-                p={{ base: "20px", md: "30px" }}
-                pe="20px"
-                minH="100vh"
-                pt="50px"
-              >
-                {/* <Switch>
-                  {/* <Route path="/headquarters" component={AirHeadquarters} /> */}
-                {/* // Info This is the Outlet */}
-                {/* {getRoutes(routes)} */}
-                {/* {routes.map(() => (
-                    <Route
-                      path="/dashboard"
-                      component={AirHeadquarters}
-                      key={index}
-                    />
-                  ))}
-                  <Route
-                    path="/headquarters"
-                    component={AirHeadquarters}
-                    key={key}
-                  /> 
-                  <Redirect from="/" to="/admin/default" />
-                </Switch> */}
-
-                {children}
-              </Box>
-            ) : null}
+            {/* {getRoute() ? ( */}
+            <Box
+              mx="auto"
+              p={{ base: "20px", md: "30px" }}
+              pe="20px"
+              minH="100vh"
+              pt="50px"
+            >
+              <Outlet />
+            </Box>
+            {/* // ) : null} */}
             <Box>
               <Footer />
             </Box>
