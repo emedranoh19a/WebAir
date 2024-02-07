@@ -25,9 +25,7 @@ import PropTypes from "prop-types";
 // Assets
 import { IoMenuOutline } from "react-icons/io5";
 
-function Sidebar(props) {
-  const { routes } = props;
-
+function Sidebar({ routes }) {
   let shadow = useColorModeValue(
     "14px 17px 40px 4px rgba(112, 144, 176, 0.08)",
     "unset"

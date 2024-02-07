@@ -22,7 +22,7 @@ import DataTables from "views/admin/dataTables";
 import SignInCentered from "views/auth/signIn";
 import AirStores from "views/admin/AirStores";
 import AirHeadquarters from "views/admin/AirHeadquarters";
-import AirHeadquarter from "views/admin/AirHeadquarter";
+// import AirHeadquarter from "views/admin/AirHeadquarter";
 const routes = [
   {
     name: "本部",

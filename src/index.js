@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import "assets/css/App.css";
 import {
   BrowserRouter,
-  HashRouter,
-  Route,
+  // HashRouter,
+  // Route,
   Switch,
   Redirect,
 } from "react-router-dom";
 
-import { CompatRouter } from "react-router-dom-v5-compat";
+import { CompatRoute, CompatRouter } from "react-router-dom-v5-compat";
 import AppLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
@@ -17,7 +17,7 @@ import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import AirHeadquarters from "views/admin/AirHeadquarters";
 import AirStores from "views/admin/AirStores";
 
-import MainDashboard from "views/admin/default";
+// import MainDashboard from "views/admin/default";
 import AirHeadquarter from "views/admin/AirHeadquarter";
 
 //General notes: For instance, only and only WebSpace users are going to use the page.
@@ -52,13 +52,23 @@ ReactDOM.render(
           <CompatRouter>
             <AppLayout>
               <Switch>
-                <Route path="/headquarters" component={AirHeadquarters} />
-                <Route path="/headquarters/:hqId" component={AirHeadquarter} />
+                <CompatRoute path="/headquarters" component={AirHeadquarters} />
+                <CompatRoute
+                  path="/headquarters/:hqId"
+                  component={AirHeadquarter}
+                />
+                <CompatRoute path="/stores" component={AirStores} />
+                <CompatRoute
+                  path="/users"
+                  component={() => <h1>I am the Users page</h1>}
+                />
+                {/* <Route path="/headquarters" component={AirHeadquarters} /> */}
+                {/* <Route path="/headquarters/:hqId" component={AirHeadquarter} />
                 <Route path="/stores" component={AirStores} />
                 <Route
                   path="/users"
                   component={() => <h1>I am the Users page</h1>}
-                />
+                /> */}
                 <Redirect from="/" to="/headquarters" />
               </Switch>
             </AppLayout>
@@ -76,16 +86,16 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-{
-  /* <Switch>
-            <Route path={"/"} component={AppLayout} />
-            <Route path={`/auth`} component={AuthLayout} />
-            <Route path={`/admin`} component={AppLayout} />
-            {/* <Route path="/headquarters" component={AirHeadquarters} />
-            <Route path="/stores" component={AirHeadquarters} /> 
-            <Redirect from="/" to="/admin" />
-          </Switch> */
-}
+// {
+//   /* <Switch>
+//             <Route path={"/"} component={AppLayout} />
+//             <Route path={`/auth`} component={AuthLayout} />
+//             <Route path={`/admin`} component={AppLayout} />
+//             {/* <Route path="/headquarters" component={AirHeadquarters} />
+//             <Route path="/stores" component={AirHeadquarters} /> 
+//             <Redirect from="/" to="/admin" />
+//           </Switch> */
+// }
 
 //IDEA Use custom fetcherHooks to extract data from everywhere.
 //--------------------------------DOING-----------------------------

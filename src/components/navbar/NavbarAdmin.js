@@ -13,10 +13,14 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import AdminNavbarLinks from "components/navbar/NavbarLinksAdmin";
 
-export default function AdminNavbar(props) {
-  //TODO delete the console log
-  console.log("Admin navbar props");
-  console.log(props);
+export default function AdminNavbar({
+  onOpen,
+  logoText,
+  secondary,
+  message,
+  fixed,
+  brandText,
+}) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -42,8 +46,6 @@ export default function AdminNavbar(props) {
   };
 
   //Brand text: Pages title
-  const { secondary, message, brandText } = props;
-
   function StyledNavbar({ children }) {
     return (
       <Box
@@ -106,13 +108,14 @@ export default function AdminNavbar(props) {
           {/* //TODO averiguar una manera de extraer los links desde React Router.
 		   Con hijos y todo, dependiendo del location actual. Esa es la única responsabilidad de Breadcrumb*/}
           <BreadcrumbLink href="#" color={secondaryText}>
+            {/* //TODO this brandText  is suspicious */}
             {brandText}
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
     );
   }
-  function StyledTitle({ children }) {
+  function StyledTitle({ title }) {
     return (
       <Link
         color={mainText}
@@ -131,7 +134,7 @@ export default function AdminNavbar(props) {
           boxShadow: "none",
         }}
       >
-        {children}
+        {title}
       </Link>
     );
   }
@@ -150,15 +153,15 @@ export default function AdminNavbar(props) {
         <Box mb={{ sm: "8px", md: "0px" }}>
           <StyledBreadCrumb />
           {/* Here we create navbar brand, based on route name */}
-          <StyledTitle>{brandText}</StyledTitle>
+          <StyledTitle title={brandText} />
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           {/* //TODO eliminar algunas cosas de por aquí */}
           <AdminNavbarLinks
-            onOpen={props.onOpen}
-            logoText={props.logoText}
-            secondary={props.secondary}
-            fixed={props.fixed}
+            onOpen={onOpen}
+            logoText={logoText}
+            secondary={secondary}
+            fixed={fixed}
             scrolled={scrolled}
           />
         </Box>

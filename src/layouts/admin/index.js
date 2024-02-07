@@ -3,9 +3,9 @@ import {
   Portal,
   Box,
   useDisclosure,
-  Text,
-  Button,
-  Link,
+  // Text,
+  // Button,
+  // Link,
 } from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
 // Layout components
@@ -13,16 +13,17 @@ import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+// import { Redirect, Route, Switch } from "react-router-dom";
+//Note: This is used if want to create routes dinamically
+// import { CompatRoute } from "react-router-dom-v5-compat";
 import routes from "routes.js";
-import AirHeadquarters from "views/admin/AirHeadquarters";
+// import AirHeadquarters from "views/admin/AirHeadquarters";
 
 // Custom Chakra theme
 // Info: Admin layout. This is rendered in the index.js (inside a router)
-export default function AppLayout({ children, ...rest }) {
+export default function AppLayout({ children }) {
   // const { children, ...rest } = props;
-  console.log("App Layout props");
-  console.log(rest);
+
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -99,30 +100,35 @@ export default function AppLayout({ children, ...rest }) {
     }
     return activeNavbar;
   }
-  function getRoutes(routes) {
-    // Info this handles the switch of the components
-    return routes.map((route, key) => {
-      const { layout, path, component, collapse, items } = route;
-      if (layout === "/admin") {
-        return (
-          <Route
-            //TODO deshacerse del layout
-            path={layout + path}
-            component={component}
-            key={key}
-          />
-        );
-      }
-      if (collapse) {
-        return getRoutes(items);
-      }
-      if (route.items) {
-        return getRoutes(route.items);
-      } else {
-        return null;
-      }
-    });
-  }
+  // function getRoutes(routes) {
+  //   // Info this handles the switch of the components
+  //   return routes.map((route, key) => {
+  //     const { layout, path, component, collapse, items } = route;
+  //     if (layout === "/admin") {
+  //       return (
+  //         <CompatRoute //TODO deshacerse del layout
+  //           path={layout + path}
+  //           component={component}
+  //           key={key}
+  //         />
+  //         // <Route
+  //         //   //TODO deshacerse del layout
+  //         //   path={layout + path}
+  //         //   component={component}
+  //         //   key={key}
+  //         // />
+  //       );
+  //     }
+  //     if (collapse) {
+  //       return getRoutes(items);
+  //     }
+  //     if (route.items) {
+  //       return getRoutes(route.items);
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  // }
   document.documentElement.dir = "ltr";
   const { onOpen } = useDisclosure();
   document.documentElement.dir = "ltr";
@@ -136,7 +142,7 @@ export default function AppLayout({ children, ...rest }) {
             setToggleSidebar,
           }}
         >
-          <Sidebar routes={routes} {...rest} />
+          <Sidebar routes={routes} />
           <Box
             float="right"
             minHeight="100vh"
@@ -160,7 +166,6 @@ export default function AppLayout({ children, ...rest }) {
                   secondary={getActiveNavbar(routes)}
                   message={getActiveNavbarText(routes)}
                   fixed={fixed}
-                  {...rest}
                 />
               </Box>
             </Portal>
