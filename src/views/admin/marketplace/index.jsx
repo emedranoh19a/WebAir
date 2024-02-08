@@ -61,7 +61,7 @@ export default function Marketplace() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+    <>
       {/* Main Fields */}
       <Grid
         mb="20px"
@@ -312,6 +312,6 @@ export default function Marketplace() {
         </Flex>
       </Grid>
       {/* Delete Product */}
-    </Box>
+    </>
   );
 }

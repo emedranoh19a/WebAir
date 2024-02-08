@@ -1,11 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "assets/css/App.css";
-import {
-  BrowserRouter,
-  Routes, Route
-
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import AppLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -16,7 +12,7 @@ import AirStores from "views/admin/AirStores";
 
 // import MainDashboard from "views/admin/default";
 import AirHeadquarter from "views/admin/AirHeadquarter";
-
+import routes from "routes";
 //General notes: For instance, only and only WebSpace users are going to use the page.
 //The inventory tracking application is going to be done later.
 
@@ -41,12 +37,64 @@ import AirHeadquarter from "views/admin/AirHeadquarter";
 //
 //.log()
 // TODO implement client side pagination with react table.
+// Info todas las rutas son definibles dentro de route.js
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <React.StrictMode>
       <ThemeEditorProvider>
         <BrowserRouter>
-          <AppLayout>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Navigate replace to="headquarters" />} />
+              {/* // Info: items go to the sidebar, subitems don't (detailds page)  */}
+              {routes.map((route, key) => {
+                return (
+                  <>
+                    {route.children &&
+                      route.children.map((childRoute, childIndex) => (
+                        <Route
+                          key={childIndex}
+                          path={childRoute.path}
+                          element={childRoute.component}
+                        />
+                      ))}
+                    <Route
+                      key={key}
+                      path={route.path}
+                      element={route.component}
+                    />
+                  </>
+                );
+              })}
+            </Route>
+          </Routes>
+          {/* 
+              
+             
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="bookings/:bookingId" element={<Booking />} />
+              <Route path="checkin/:bookingId" element={<Checkin />} />
+              <Route path="cabins" element={<Cabins />} />
+              <Route path="users" element={<Users />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="account" element={<Account />} />
+            </Route>
+
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          
+              
+              */}
+          {/* <AppLayout>
             <Routes>
               <Route path="headquarters" component={AirHeadquarters} />
               <Route path="/headquarters/:hqId" component={AirHeadquarter} />
@@ -55,16 +103,8 @@ ReactDOM.render(
                 path="/users"
                 component={() => <h1>I am the Users page</h1>}
               />
-              {/* <Route path"/headquarters" component={AirHeadquarters} /> */}
-              {/* <Route path="/headquarters/:hqId" component={AirHeadquarter} />
-                <Route path="/stores" component={AirStores} />
-                <Route
-                  path="/users"
-                  component={() => <h1>I am the Users page</h1>}
-                /> */}
-              {/* <Redirect from="/" to="/headquarters" /> */}
             </Routes>
-          </AppLayout>
+          </AppLayout> */}
 
           {/* <AppLayout>
             <Switch>

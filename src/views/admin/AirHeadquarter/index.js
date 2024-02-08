@@ -105,7 +105,7 @@ export default function AirHeadquarter() {
   // const textColorBrand = useColorModeValue("brand.500", "white");
 
   return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+    <Box>
       {/* Main Fields */}
       <Grid
         mb="20px"

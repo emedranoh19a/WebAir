@@ -22,7 +22,7 @@ import routes from "routes.js";
 
 // Custom Chakra theme
 // Info: Admin layout. This is rendered in the index.js (inside a router)
-export default function AppLayout({ children }) {
+export default function AppLayout() {
   // const { children, ...rest } = props;
 
   // states and functions
@@ -171,7 +171,7 @@ export default function AppLayout({ children }) {
                 />
               </Box>
             </Portal>
-            {/* {getRoute() ? ( */}
+
             <Box
               mx="auto"
               p={{ base: "20px", md: "30px" }}
@@ -179,9 +179,11 @@ export default function AppLayout({ children }) {
               minH="100vh"
               pt="50px"
             >
-              <Outlet />
+              <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+                <Outlet />
+              </Box>
             </Box>
-            {/* // ) : null} */}
+
             <Box>
               <Footer />
             </Box>
