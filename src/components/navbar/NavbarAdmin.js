@@ -12,6 +12,54 @@ import {
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import AdminNavbarLinks from "components/navbar/NavbarLinksAdmin";
+import { useLocation, useParams } from "react-router-dom";
+import routes from "routes";
+
+function usePageTitle() {
+  const { pathname } = useLocation();
+  console.log(pathname);
+  const params = useParams();
+  const paramsNum = Object.entries(params).length;
+  const pathElement = pathname.split("/")[1];
+  //At this point, pathElement variable matches routers'
+
+  let foundPage = routes.find((route) => {
+    return route.path === pathElement;
+  });
+  // Second condition: If it has url parameters, it is a details page:
+  if (paramsNum > 0 && foundPage.children) {
+    foundPage = foundPage.children[0];
+  }
+  return foundPage.name;
+}
+
+function useNavbarStyles() {
+  //scrolled, setScrolled, mainText, secondaryText, navBg
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", changeNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", changeNavbar);
+    };
+  });
+  const changeNavbar = () => {
+    if (window.scrollY > 1) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+  // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
+  let mainText = useColorModeValue("navy.700", "white");
+  let secondaryText = useColorModeValue("gray.700", "white");
+  let navbarBg = useColorModeValue(
+    "rgba(244, 247, 254, 0.2)",
+    "rgba(11,20,55,0.5)"
+  );
+
+  return { scrolled, mainText, secondaryText, navbarBg };
+}
 
 export default function AdminNavbar({
   onOpen,
@@ -21,79 +69,10 @@ export default function AdminNavbar({
   fixed,
   brandText,
 }) {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNavbar);
-
-    return () => {
-      window.removeEventListener("scroll", changeNavbar);
-    };
-  });
-  // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
-  let mainText = useColorModeValue("navy.700", "white");
-  let secondaryText = useColorModeValue("gray.700", "white");
-  let navbarBg = useColorModeValue(
-    "rgba(244, 247, 254, 0.2)",
-    "rgba(11,20,55,0.5)"
-  );
-  const changeNavbar = () => {
-    if (window.scrollY > 1) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
-
-  //Brand text: Pages title
-  function StyledNavbar({ children }) {
-    return (
-      <Box
-        position="fixed"
-        boxShadow="none"
-        bg={navbarBg}
-        borderColor="transparent"
-        filter="none"
-        backdropFilter="blur(20px)"
-        backgroundPosition="center"
-        backgroundSize="cover"
-        borderRadius="16px"
-        borderWidth="1.5px"
-        borderStyle="solid"
-        transitionDelay="0s, 0s, 0s, 0s"
-        transitionDuration=" 0.25s, 0.25s, 0.25s, 0s"
-        transitionProperty="box-shadow, background-color, filter, border"
-        transitionTimingFunction="linear, linear, linear, linear"
-        alignItems={{ xl: "center" }}
-        display={secondary ? "block" : "flex"}
-        minH="75px"
-        justifyContent={{ xl: "center" }}
-        lineHeight="25.6px"
-        mx="auto"
-        mt="0px"
-        pb="8px"
-        right={{ base: "12px", md: "30px", lg: "30px", xl: "30px" }}
-        px={{
-          sm: "15px",
-          md: "10px",
-        }}
-        ps={{
-          xl: "12px",
-        }}
-        pt="8px"
-        top={{ base: "12px", md: "16px", lg: "20px", xl: "20px" }}
-        w={{
-          base: "calc(100vw - 6%)",
-          md: "calc(100vw - 8%)",
-          lg: "calc(100vw - 6%)",
-          xl: "calc(100vw - 350px)",
-          "2xl": "calc(100vw - 365px)",
-        }}
-      >
-        {children}
-      </Box>
-    );
-  }
+  const { scrolled, mainText, secondaryText, navbarBg } = useNavbarStyles();
+  const pageTitle = usePageTitle();
+  console.log(pageTitle);
+  //Styled components
 
   function StyledBreadCrumb() {
     return (
@@ -105,7 +84,7 @@ export default function AdminNavbar({
         </BreadcrumbItem> */}
 
         <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
-          {/* //TODO averiguar una manera de extraer los links desde React Router.
+          {/* //TODO averiguar una manera de extraer los links desde  Router.
 		   Con hijos y todo, dependiendo del location actual. Esa es la única responsabilidad de Breadcrumb*/}
           <BreadcrumbLink href="#" color={secondaryText}>
             {/* //TODO this brandText  is suspicious */}
@@ -117,9 +96,9 @@ export default function AdminNavbar({
   }
   function StyledTitle({ title }) {
     return (
-      <Link
+      <Text
         color={mainText}
-        href="#"
+        // href="#"
         bg="inherit"
         borderRadius="inherit"
         fontWeight="bold"
@@ -135,12 +114,50 @@ export default function AdminNavbar({
         }}
       >
         {title}
-      </Link>
+      </Text>
     );
   }
 
+  const boxStyles = {
+    position: "fixed",
+    boxShadow: "none",
+    bg: navbarBg,
+    borderColor: "transparent",
+    filter: "none",
+    backdropFilter: "blur(20px)",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    borderRadius: "16px",
+    borderWidth: "1.5px",
+    borderStyle: "solid",
+    transitionDelay: "0s, 0s, 0s, 0s",
+    transitionDuration: "0.25s, 0.25s, 0.25s, 0s",
+    transitionProperty: "box-shadow, background-color, filter, border",
+    transitionTimingFunction: "linear, linear, linear, linear",
+    alignItems: { xl: "center" },
+    display: secondary ? "block" : "flex",
+    minHeight: "75px",
+    justifyContent: { xl: "center" },
+    lineHeight: "25.6px",
+    margin: "auto",
+    marginTop: "0px",
+    paddingBottom: "8px",
+    right: { base: "12px", md: "30px", lg: "30px", xl: "30px" },
+    paddingLeft: { sm: "15px", md: "10px" },
+    paddingRight: { xl: "12px" },
+    paddingTop: "8px",
+    top: { base: "12px", md: "16px", lg: "20px", xl: "20px" },
+    width: {
+      base: "calc(100vw - 6%)",
+      md: "calc(100vw - 8%)",
+      lg: "calc(100vw - 6%)",
+      xl: "calc(100vw - 350px)",
+      "2xl": "calc(100vw - 365px)",
+    },
+  };
+
   return (
-    <StyledNavbar>
+    <Box {...boxStyles}>
       <Flex
         w="100%"
         flexDirection={{
@@ -151,9 +168,9 @@ export default function AdminNavbar({
         mb="0px"
       >
         <Box mb={{ sm: "8px", md: "0px" }}>
-          <StyledBreadCrumb />
+          {/* <StyledBreadCrumb /> */}
           {/* Here we create navbar brand, based on route name */}
-          <StyledTitle title={brandText} />
+          <StyledTitle title={pageTitle} />
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           {/* //TODO eliminar algunas cosas de por aquí */}
@@ -168,7 +185,7 @@ export default function AdminNavbar({
       </Flex>
       {/* //TODO what is this? */}
       {secondary ? <Text color="black">{message}</Text> : null}
-    </StyledNavbar>
+    </Box>
   );
 }
 

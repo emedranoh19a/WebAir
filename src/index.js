@@ -7,31 +7,14 @@ import AppLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
-import AirHeadquarters from "views/admin/AirHeadquarters";
-import AirStores from "views/admin/AirStores";
+// import AirHeadquarters from "views/admin/AirHeadquarters";
+// import AirStores from "views/admin/AirStores";
 
 // import MainDashboard from "views/admin/default";
-import AirHeadquarter from "views/admin/AirHeadquarter";
+// import AirHeadquarter from "views/admin/AirHeadquarter/AirHeadquarter";
 import routes from "routes";
-//General notes: For instance, only and only WebSpace users are going to use the page.
-//The inventory tracking application is going to be done later.
+import Login from "pages/Login";
 
-//Main Dashboard:
-// Credit balance with  3 grouped relevant stats.
-// Small + button at the very top-right
-// Me gustan los cuatro botones neumorph de la derecha. Arriba de "Your transactions".
-
-//Your transfers
-
-//TODO Refactor the styles for the relevant components. This will be for concentrating into the logic, rather than the styles.
-
-//-----Hq page:
-//Examinar como se implementa el responsive grid en HorizonUI. (NFTS)
-//Tackle the general layout of the page with a responsive grid
-//Table of all headquarters: Table, List, Pagination, button group, SpeedDial.
-
-// HeadQuarter code, HeadQuarterName, email, disabled, createdBy, CreatedAt, ModifiedBy, ModifiedAt.
-// Relevant variables: HqName, HqCode, email, disabled.
 // Fade transition!!!! this will be awesome!
 //
 //
@@ -49,7 +32,7 @@ ReactDOM.render(
               {/* // Info: items go to the sidebar, subitems don't (detailds page)  */}
               {routes.map((route, key) => {
                 return (
-                  <>
+                  <React.Fragment key={key}>
                     {route.children &&
                       route.children.map((childRoute, childIndex) => (
                         <Route
@@ -58,15 +41,12 @@ ReactDOM.render(
                           element={childRoute.component}
                         />
                       ))}
-                    <Route
-                      key={key}
-                      path={route.path}
-                      element={route.component}
-                    />
-                  </>
+                    <Route path={route.path} element={route.component} />
+                  </React.Fragment>
                 );
               })}
             </Route>
+            <Route path="login" element={<Login />} />
           </Routes>
           {/* 
               
@@ -79,9 +59,7 @@ ReactDOM.render(
               }
             >
               <Route index element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="bookings/:bookingId" element={<Booking />} />
+
               <Route path="checkin/:bookingId" element={<Checkin />} />
               <Route path="cabins" element={<Cabins />} />
               <Route path="users" element={<Users />} />
@@ -94,24 +72,6 @@ ReactDOM.render(
           
               
               */}
-          {/* <AppLayout>
-            <Routes>
-              <Route path="headquarters" component={AirHeadquarters} />
-              <Route path="/headquarters/:hqId" component={AirHeadquarter} />
-              <Route path="/stores" component={AirStores} />
-              <Route
-                path="/users"
-                component={() => <h1>I am the Users page</h1>}
-              />
-            </Routes>
-          </AppLayout> */}
-
-          {/* <AppLayout>
-            <Switch>
-              <Route path="/headquarters" component={AirHeadquarters} />
-              <Redirect from="/" to="/admin/default" />
-            </Switch>
-          </AppLayout> */}
         </BrowserRouter>
       </ThemeEditorProvider>
     </React.StrictMode>
@@ -119,63 +79,9 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// {
-//   /* <Switch>
-//             <Route path={"/"} component={AppLayout} />
-//             <Route path={`/auth`} component={AuthLayout} />
-//             <Route path={`/admin`} component={AppLayout} />
-//             {/* <Route path="/headquarters" component={AirHeadquarters} />
-//             <Route path="/stores" component={AirHeadquarters} />
-//             <Redirect from="/" to="/admin" />
-//           </Switch> */
-// }
-
-//IDEA Use custom fetcherHooks to extract data from everywhere.
 //--------------------------------DOING-----------------------------
 // Question: Peticiones de API.
 //-------API de 本部:
-
-//one that returns all results of headquarters, and only their relevant data contained in each result.
-//Parameters
-// 1. page, numResults: 2 parameters that indicate pagination.
-//    Example: (page:1, results:10) should return the first 10 headquarters.
-//    Example 2: (page:3, results:4) should return the 9th, 10th, 11th and 12th headquarters in the DB.
-//2. optional parameters:
-// a. a global search string that finds matched results accross all columns
-// b. filtering options, object for making detailed search operations for each field. (fields are not always provided)
-
-//one that returns the detailed data of a single headquarter, based on the headquarterId.
-
-//one for CREATING a new headquarter
-//one for UPDATING a new headquarter
-//one for DELETING an existing headquarter.
-
-//API de 店舗
-
-//one that returns all available stores. (with only the relevant information)
-//1. page, numResults (for pagination, explained before)
-//Optional parameters.
-//a. a global search string that finds matched results accross all columns of Stores table.
-//b. filtering parameters for detailed search implementation. (object)
-
-//one that returns the details of a single store.
-
-//one for CREATING a new store
-//one for UPDATING a new store
-//one for DELETING an existing store.
-
-//-------API de ユーザー
-//one that returns all users. (only the relevant information)
-//Parameters:
-//1. page, numResults (for pagiunation, explained before)
-//2. optional parameters:
-// a. a global search string that finds matching results accross all columns
-// b. filter parameters. (object)
-
-//one that returns all details of a single user.
-//one for CREATING a new user
-//one for UPDATING a new user
-//one for DELETING an existing user.
 
 // Todo: Unas tablas con datos falsos. Luego ordenas el routing.
 //Datos relevantes de "tiendas":

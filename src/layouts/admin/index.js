@@ -33,6 +33,28 @@ export default function AppLayout() {
   //   //TODO we have to tackle here, since we are not using layouts.
   //   return window.location.pathname !== "/admin/full-screen-maps";
   // }
+  // const location = useLocation();
+  // const [activeRoute, setActiveRoute] = useState("Default Brand Text");
+
+  // useEffect(() => {
+  //   const pathname = location.pathname;
+  //   const matchingRoute = routes.find((route) => {
+  //     if (route.children) {
+  //       return route.children.some((child) =>
+  //         pathname.startsWith(route.path + child.path)
+  //       );
+  //     } else {
+  //       return pathname.startsWith(route.path);
+  //     }
+  //   });
+
+  //   if (matchingRoute) {
+  //     setActiveRoute(matchingRoute.name);
+  //   } else {
+  //     setActiveRoute("Default Brand Text");
+  //   }
+  // }, [location.pathname]);
+
   function getActiveRoute(routes) {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
@@ -102,35 +124,6 @@ export default function AppLayout() {
     }
     return activeNavbar;
   }
-  // function getRoutes(routes) {
-  //   // Info this handles the switch of the components
-  //   return routes.map((route, key) => {
-  //     const { layout, path, component, collapse, items } = route;
-  //     if (layout === "/admin") {
-  //       return (
-  //         <CompatRoute //TODO deshacerse del layout
-  //           path={layout + path}
-  //           component={component}
-  //           key={key}
-  //         />
-  //         // <Route
-  //         //   //TODO deshacerse del layout
-  //         //   path={layout + path}
-  //         //   component={component}
-  //         //   key={key}
-  //         // />
-  //       );
-  //     }
-  //     if (collapse) {
-  //       return getRoutes(items);
-  //     }
-  //     if (route.items) {
-  //       return getRoutes(route.items);
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // }
   document.documentElement.dir = "ltr";
   const { onOpen } = useDisclosure();
   document.documentElement.dir = "ltr";
@@ -167,6 +160,7 @@ export default function AppLayout() {
                   brandText={getActiveRoute(routes)}
                   secondary={getActiveNavbar(routes)}
                   message={getActiveNavbarText(routes)}
+                  // message={activeRoute}
                   fixed={fixed}
                 />
               </Box>
