@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 
 import React from "react";
 
-export const renderTrack = ({ style, ...props }) => {
+export const renderTrack = ({ style }) => {
   const trackStyle = {
     position: "absolute",
     top: 2,

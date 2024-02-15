@@ -109,7 +109,6 @@ export const hqColumnsDefinition = [
 // TODO Hacer la definición de columnas de AirSevices
 // TODO Hacer la definición de columnas de wsUsers
 // TODO Hacer la definición de columnas de viewedBy, modifiedBy. Actividad por parte de WSUsers
-// TODO Investigar que onda con el paginado condicional.
 // TODO Investigar que onda con el filtrado de las páginas
 // TODO Crear una barra de búsqueda para buscar por cada tabla.
 // TODO Darle formato a las fechas con moment JS, o date-fns, o algo.
@@ -117,10 +116,8 @@ export const hqColumnsDefinition = [
 //TODO Crear datos falsos para la tabla de Stores
 //TODO Crear datos falsos para la tabla de Users
 //TODO Crear datos falsos para la tabla de AirServices
-//TODO Crear datos falsos para la tabla de wsUsers
+
 //TODO agregar un anchor a cada hilera según sea el caso.
-// Pasar el path como prop en WebAirTable, pero concatenar condicionalmente el id dento de WebAirTable, según su id.
-//TODO Modificar el router
 
 // TODO componentes dedicados al fetch para cada tabla.
 

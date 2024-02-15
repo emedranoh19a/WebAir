@@ -63,33 +63,3 @@ export default function App() {
     </React.StrictMode>
   );
 }
-// // Refactor: The upper version is the chakra version.
-// import { useState } from "react";
-// import {
-//   Button,
-//   Drawer,
-//   DrawerOverlay,
-//   DrawerContent,
-//   DrawerCloseButton,
-//   DrawerHeader,
-//   DrawerBody,
-// } from "@chakra-ui/react";
-// function App() {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const onClose = () => setIsOpen(false);
-//   const onOpen = () => setIsOpen(true);
-//   return (
-//     <>
-//       <Button onClick={onOpen}>Open Drawer</Button>
-//       <Drawer isOpen={isOpen} onClose={onClose}>
-//         <DrawerOverlay />
-//         <DrawerContent>
-//           <DrawerCloseButton />
-//           <DrawerHeader>Create your account</DrawerHeader>
-//           <DrawerBody>{/* Drawer content */}</DrawerBody>
-//         </DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// }
-// export default App;
