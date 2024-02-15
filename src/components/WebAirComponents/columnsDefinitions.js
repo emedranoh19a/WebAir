@@ -1,9 +1,8 @@
 // Note:
 //Other cells of the original row are accessible by one cell.
 
-import { Flex, Icon, Progress, Text } from "@chakra-ui/react";
-import { MdCancel, MdCheckCircle, MdOutlineError } from "react-icons/md";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { Flex, Icon, Text } from "@chakra-ui/react";
+import { MdCancel, MdCheckCircle } from "react-icons/md";
 
 //Cells. Presentational components
 function StackedInfo({ topRow, bottomRow }) {

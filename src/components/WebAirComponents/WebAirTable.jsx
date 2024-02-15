@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import {
   Flex,
+  LinkOverlay,
+  // HStack,
   Table,
-  Progress,
-  Icon,
   Tbody,
   Td,
   Text,
@@ -20,11 +20,16 @@ import {
 } from "react-table";
 
 import Card from "components/card/Card";
+import { SearchBar } from "components/navbar/searchBar/SearchBar";
+import { useNavigate } from "react-router-dom";
+
+// Note: can we specify an uncompleted navigation? This way
 
 export default function WebAirTable({
   tableTitle,
   columnsDefinition,
   tableData,
+  linkGenerator, //Es una función que genera un link de navegación. los parámetros se van a concatenar.
 }) {
   // Info: flexible by accepting column render definition and data.
   const columns = useMemo(() => columnsDefinition, [columnsDefinition]);
@@ -52,22 +57,20 @@ export default function WebAirTable({
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
-
-  function TableTitle() {
+  const navigate = useNavigate();
+  const TableTitle = () => {
     return (
-      <Flex px="25px" justify="space-between" mb="20px" align="center">
-        <Text
-          color={textColor}
-          fontSize="22px"
-          fontWeight="700"
-          lineHeight="100%"
-        >
-          {tableTitle}
-        </Text>
-        {/* <Menu /> */}
-      </Flex>
+      <Text
+        color={textColor}
+        fontSize="22px"
+        fontWeight="700"
+        lineHeight="100%"
+      >
+        {tableTitle}
+      </Text>
     );
-  }
+  };
+
   return (
     <Card
       direction="column"
@@ -75,7 +78,10 @@ export default function WebAirTable({
       px="0px"
       overflowX={{ sm: "scroll", lg: "hidden" }}
     >
-      <TableTitle />
+      <Flex px="25px" justify="space-between" mb="20px" align="center">
+        <TableTitle />
+        <SearchBar />
+      </Flex>
       <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
           {headerGroups.map((headerGroup, index) => (
@@ -104,20 +110,29 @@ export default function WebAirTable({
           {page.map((row, index) => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={index}>
-                {row.cells.map((cell, index) => (
-                  <Td
-                    key={index}
-                    fontSize={{ sm: "14px" }}
-                    minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                    borderColor="transparent"
-                    color={textColor}
-                    {...cell.getCellProps()}
-                  >
-                    {cell.render("Cell")}
-                  </Td>
-                ))}
-              </Tr>
+              <React.Fragment key={index}>
+                <Tr
+                  {...row.getRowProps()}
+                  key={index}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    navigate(linkGenerator(row));
+                  }}
+                >
+                  {row.cells.map((cell, index) => (
+                    <Td
+                      key={index}
+                      fontSize={{ sm: "14px" }}
+                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
+                      borderColor="transparent"
+                      color={textColor}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render("Cell")}
+                    </Td>
+                  ))}
+                </Tr>
+              </React.Fragment>
             );
           })}
         </Tbody>

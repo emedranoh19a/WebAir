@@ -177,7 +177,7 @@ export default function AirStores() {
             </Flex>
             {/* // Note: Tackle width and flex properties for responsiveness */}
             <Box w="100%">
-              <Stores columnsData={columnsData} tableData={tableData} />
+              {/* <Stores columnsData={columnsData} tableData={tableData} /> */}
             </Box>
             {/* // Note: a vertical grid containing 2  */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px"></SimpleGrid>

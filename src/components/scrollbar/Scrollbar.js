@@ -15,14 +15,17 @@ export const renderTrack = ({ style, ...props }) => {
     background: "transparent",
     borderRadius: 3,
   };
-  return <div style={{ ...style, ...trackStyle }} {...props} />;
+  // return <div style={{ ...style, ...trackStyle }} {...props} />;
+  return <div style={{ ...style, ...trackStyle }} />;
 };
-export const renderThumb = ({ style, ...props }) => {
+// export const renderThumb = ({ style, ...props }) => {
+export const renderThumb = ({ style }) => {
   const thumbStyle = {
     borderRadius: 15,
     background: "rgba(222, 222, 222, .1)",
   };
-  return <div style={{ ...style, ...thumbStyle }} {...props} />;
+  // return <div style={{ ...style, ...thumbStyle }} {...props} />;
+  return <div style={{ ...style, ...thumbStyle }} />;
 };
 export const renderView = ({ style, ...props }) => {
   const viewStyle = {

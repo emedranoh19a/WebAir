@@ -71,8 +71,6 @@ export function SidebarResponsive({ routes }) {
   let sidebarBackgroundColor = useColorModeValue("white", "navy.800");
   let menuColor = useColorModeValue("gray.400", "white");
   // // SIDEBAR
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
 
   // const { routes } = props;
   // let isWindows = navigator.platform.startsWith("Win");
@@ -80,7 +78,7 @@ export function SidebarResponsive({ routes }) {
 
   return (
     <Flex display={{ sm: "flex", xl: "none" }} alignItems="center">
-      <Flex ref={btnRef} w="max-content" h="max-content" onClick={onOpen}>
+      <Flex w="max-content" h="max-content">
         {/* This is the hamburguer icon */}
         <Icon
           as={IoMenuOutline}
@@ -92,32 +90,6 @@ export function SidebarResponsive({ routes }) {
           _hover={{ cursor: "pointer" }}
         />
       </Flex>
-      <Drawer
-        isOpen={isOpen}
-        onClose={onClose}
-        placement={document.documentElement.dir === "rtl" ? "right" : "left"}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent w="285px" maxW="285px" bg={sidebarBackgroundColor}>
-          <DrawerCloseButton
-            zIndex="3"
-            onClose={onClose}
-            _focus={{ boxShadow: "none" }}
-            _hover={{ boxShadow: "none" }}
-          />
-          <DrawerBody maxW="285px" px="0rem" pb="0">
-            <Scrollbars
-              autoHide
-              renderTrackVertical={renderTrack}
-              renderThumbVertical={renderThumb}
-              renderView={renderView}
-            >
-              <SidebarContent routes={routes} />
-            </Scrollbars>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </Flex>
   );
 }

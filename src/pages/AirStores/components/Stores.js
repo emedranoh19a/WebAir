@@ -55,37 +55,23 @@ export default function Stores(props) {
 
   //Decomposed into internal components due to hooks usage and prop-drilling avoids.
   function CardHeader() {
-    function StyledText({ children }) {
-      return (
-        <Text
-          color={textColor}
-          fontSize="22px"
-          fontWeight="700"
-          lineHeight="100%"
-        >
-          {children}
-        </Text>
-      );
-    }
-    function StyledContainer({ children }) {
-      return (
-        <Flex px="25px" justify="space-between" mb="20px" align="center">
-          {children}
-        </Flex>
-      );
-    }
-
+    const flexStyles = {
+      px: "25px",
+      justify: "space-between",
+      mb: "20px",
+      align: "center",
+    };
+    const textStyles = {
+      color: { textColor },
+      fontSize: "22px",
+      fontWeight: "700",
+      lineHeight: "100%",
+    };
     return (
-      <StyledContainer>
-        <StyledText>
-          {/* //TODO conditional renders. 
-          //If there is a relevant url param: then display something else: ""
-          //If there is not url Params: Render "all the stores."
-          */}
-          全ての店舗または特定の店舗のリスト
-        </StyledText>
-        <Menu />
-      </StyledContainer>
+      <Flex {...flexStyles}>
+        <Text {...textStyles}>全ての店舗または特定の店舗のリスト</Text>
+        {/* <Menu /> */}
+      </Flex>
     );
   }
   function TableHeadItem({ column }) {

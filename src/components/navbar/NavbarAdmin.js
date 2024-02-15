@@ -1,11 +1,10 @@
 // Chakra Imports
 import {
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
+  // Breadcrumb,
+  // BreadcrumbItem,
+  // BreadcrumbLink,
   Flex,
-  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -17,7 +16,6 @@ import routes from "routes";
 
 function usePageTitle() {
   const { pathname } = useLocation();
-  console.log(pathname);
   const params = useParams();
   const paramsNum = Object.entries(params).length;
   const pathElement = pathname.split("/")[1];
@@ -30,7 +28,7 @@ function usePageTitle() {
   if (paramsNum > 0 && foundPage.children) {
     foundPage = foundPage.children[0];
   }
-  return foundPage.name;
+  return foundPage.name || "";
 }
 
 function useNavbarStyles() {
@@ -69,31 +67,30 @@ export default function AdminNavbar({
   fixed,
   brandText,
 }) {
-  const { scrolled, mainText, secondaryText, navbarBg } = useNavbarStyles();
+  const { scrolled, mainText, navbarBg } = useNavbarStyles();
   const pageTitle = usePageTitle();
-  console.log(pageTitle);
   //Styled components
 
-  function StyledBreadCrumb() {
-    return (
-      <Breadcrumb>
-        {/* <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
-          <BreadcrumbLink href="#" color={secondaryText}>
-            ページ
-          </BreadcrumbLink>
-        </BreadcrumbItem> */}
+  // function StyledBreadCrumb() {
+  //   return (
+  //     <Breadcrumb>
+  //       {/* <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
+  //         <BreadcrumbLink href="#" color={secondaryText}>
+  //           ページ
+  //         </BreadcrumbLink>
+  //       </BreadcrumbItem> */}
 
-        <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
-          {/* //TODO averiguar una manera de extraer los links desde  Router.
-		   Con hijos y todo, dependiendo del location actual. Esa es la única responsabilidad de Breadcrumb*/}
-          <BreadcrumbLink href="#" color={secondaryText}>
-            {/* //TODO this brandText  is suspicious */}
-            {brandText}
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
-    );
-  }
+  //       <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
+  //         {/* //TODO averiguar una manera de extraer los links desde  Router.
+  // 	   Con hijos y todo, dependiendo del location actual. Esa es la única responsabilidad de Breadcrumb*/}
+  //         <BreadcrumbLink href="#" color={secondaryText}>
+  //           {/* //TODO this brandText  is suspicious */}
+  //           {brandText}
+  //         </BreadcrumbLink>
+  //       </BreadcrumbItem>
+  //     </Breadcrumb>
+  //   );
+  // }
   function StyledTitle({ title }) {
     return (
       <Text
@@ -174,13 +171,13 @@ export default function AdminNavbar({
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           {/* //TODO eliminar algunas cosas de por aquí */}
-          <AdminNavbarLinks
+          {/* <AdminNavbarLinks
             onOpen={onOpen}
             logoText={logoText}
             secondary={secondary}
             fixed={fixed}
             scrolled={scrolled}
-          />
+          /> */}
         </Box>
       </Flex>
       {/* //TODO what is this? */}
