@@ -21,13 +21,10 @@
 */
 
 import React from "react";
-
-// Chakra imports
 import { Box, Button, Flex, Grid } from "@chakra-ui/react";
-
-import AllHeadquartersTable from "./components/AllHeadquartersTable";
 import Drawer from "components/WebAirComponents/Drawer";
-import HeadquarterForm from "components/WebAirComponents/HeadquarterForm";
+import HeadquarterForm from "components/WebAirComponents/Forms/HeadquarterForm";
+import WebAirTable from "components/WebAirComponents/WebAirTable";
 
 // Info:Displays page of all the headquarters
 
@@ -35,8 +32,9 @@ import HeadquarterForm from "components/WebAirComponents/HeadquarterForm";
 // hqCd, hqName, email, disabled, createdBy, createdAt, modifiedBy, mmodifiedAt.
 //TODO : general layout: Search, pagination table with searchParams handler.
 
-//TODO: un botón para navegar hacia atrás.
-// TODO: Un drawer para añadir un nuevo headquarter: Debe ser una mutación. Verificar cómo funcionaba el isEditSession.
+import { hqColumnsDefinition } from "components/WebAirComponents/columnsDefinitions";
+
+import { hqData } from "components/WebAirComponents/hqMockData";
 
 export default function AirHeadquarters() {
   // Chakra Color Mode
@@ -52,7 +50,13 @@ export default function AirHeadquarters() {
       </Flex>
     </Flex>
   );
+  function linkGenerator(cell) {
+    const {
+      original: { hqCd },
+    } = cell;
 
+    return `/headquarters/${hqCd}`;
+  }
   return (
     <>
       {/* TODO falta hacer un submit al presionar "Enter" */}
@@ -62,26 +66,25 @@ export default function AirHeadquarters() {
         gap={{ base: "20px", xl: "20px" }}
         display={{ base: "block", xl: "grid" }}
       >
+        <TableContainer>
+          <WebAirTable
+            tableTitle="全ての本部"
+            columnsDefinition={hqColumnsDefinition}
+            tableData={hqData}
+            linkGenerator={linkGenerator}
+          />
+        </TableContainer>
         <Drawer>
           <Drawer.Open>
-            <Button variant="brand">店舗登録</Button>
+            <Button variant="brand" size="lg">
+              本部登録
+            </Button>
           </Drawer.Open>
-          <Drawer.Paper title="店舗登録">
+          <Drawer.Paper title="本部登録">
             <HeadquarterForm />
           </Drawer.Paper>
         </Drawer>
-        <TableContainer>
-          <AllHeadquartersTable />
-        </TableContainer>
-
-        <Flex justify="start" align="start"></Flex>
       </Grid>
-      {/* TODO Acerca del drawer:
-     
-      // TODO Hacer un form en un componente aparte.
-//TODO verificar las validaciones antes de hacer click en el botón.
-
-      */}
     </>
   );
 }

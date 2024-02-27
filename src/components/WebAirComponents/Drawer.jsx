@@ -23,13 +23,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-// TODO make the drawer a compound component.
-// TODO Maybe we don't need styles for the drawer. Plus, it is chakra UI
-// TODO add maybe a close button at the top
-
 const DrawerContext = createContext();
-//TODO El boton abre algo.
-//TODO ese algo tiene hijos.
 
 function Open({ children }) {
   const { onOpen } = useContext(DrawerContext);
@@ -43,6 +37,7 @@ function Paper({ children, title = "" }) {
       placement="right"
       onClose={onClose}
       finalFocusRef={btnRef}
+      size="lg"
     >
       <ChakraDrawerOverlay />
       <ChakraDrawerContent>
@@ -57,7 +52,8 @@ function Paper({ children, title = "" }) {
           <Button variant="outline" mr={3} onClick={onClose}>
             キャンセル
           </Button>
-          <Button variant="brand">確認</Button>
+          {/* TODO pass the Submit function, and only then close the drawer (onSuccess) */}
+          {/* <Button variant="brand">確認</Button> */}
         </ChakraDrawerFooter>
       </ChakraDrawerContent>
     </ChakraDrawer>

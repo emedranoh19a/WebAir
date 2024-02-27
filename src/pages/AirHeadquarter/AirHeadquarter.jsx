@@ -25,14 +25,16 @@ import React from "react";
 // Chakra imports
 import {
   Box,
-  // Button,
   Flex,
   Grid,
   Link,
-  Text,
   useColorModeValue,
   SimpleGrid,
+  IconButton,
 } from "@chakra-ui/react";
+import HeadquarterShowcase from "components/WebAirComponents/Showcase/HeadquarterShowcase";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 // import NFTMarketplace from "views/admin/marketplace";
 
 // Custom components
@@ -57,11 +59,6 @@ import {
 // import { tableColumnsTopCreators } from "views/admin/marketplace/variables/tableColumnsTopCreators";
 
 // import AllHeadquartersTable from "./components/AllHeadquartersTable";
-
-//TODO mientras puedes hacer tus propios componentes, en base a lo que ya tienes.
-// Una mejor organización de dará desyunar perdedores.
-//TODO Descomponer la 4c olumn table, y hacerla de 3 o 2!
-//TODO Lo correcto, es hacer una sola página de.
 
 const inlineLinks = [
   { link: "#art", label: "Art" },
@@ -102,8 +99,8 @@ export default function AirHeadquarter() {
   // Chakra Color Mode
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  // const textColorBrand = useColorModeValue("brand.500", "white");
-
+  const textColorBrand = useColorModeValue("brand.500", "white");
+  const navigate = useNavigate();
   return (
     <Box>
       {/* Main Fields */}
@@ -118,29 +115,22 @@ export default function AirHeadquarter() {
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
           {/* <Banner /> */}
-          <Flex direction="column">
+          <Flex direction="row" gap="20px" width="90%">
             {/* //TODO rescue this Flex box as the Header on a Box. */}
-            <Flex
-              mt="45px"
-              mb="20px"
-              justifyContent="space-between"
-              direction={{ base: "column", md: "row" }}
-              align={{ base: "start", md: "center" }}
-            >
-              <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-                Details of a single headquarter
-              </Text>
-              <InlineLinks links={inlineLinks} />
-            </Flex>
+            <IconButton
+              isRound={true}
+              variant="solid"
+              colorScheme="brand"
+              aria-label="Done"
+              fontSize="20px"
+              icon={<FaArrowLeft />}
+              onClick={() => navigate(-1)}
+              opacity="0.9"
+            />
+            <HeadquarterShowcase />
+
             {/* // Note: Tackle width and flex properties for responsiveness */}
-            <Box w="100%">
-              {/* <AllHeadquartersTable /> */}
-              {/* <WebAirTable
-                tableTitle="全ての本部"
-                columnDefinitions={[]}
-                tableData={[]}
-              /> */}
-            </Box>
+
             {/* // Note: a vertical grid containing 2  */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px"></SimpleGrid>
           </Flex>

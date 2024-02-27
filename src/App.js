@@ -14,7 +14,7 @@ export default function App() {
         <ChakraProvider theme={theme}>
           <BrowserRouter>
             {/* TODO vamos a implementar la autenticación de Google como una simple API.
-        // TODO luego entonces vamos a implementar las rutas como lo haría Jonas Schmedtmann.
+   
         */}
             <Routes>
               <Route element={<AppLayout />}>
@@ -39,7 +39,8 @@ export default function App() {
               <Route path="login" element={<Login />} />
             </Routes>
 
-            {/* <Route
+            {/* CODIGO DE SCHMEDTMANN
+            <Route
               element={
                 <ProtectedRoute>
                   <AppLayout />

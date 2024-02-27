@@ -1,10 +1,28 @@
 // Note:
 //Other cells of the original row are accessible by one cell.
 
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  LinkOverlay,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
+import Drawer from "./Drawer";
+import StoreForm from "./Forms/StoreForm";
+import dayjs from "dayjs";
+import ja from "dayjs/locale/ja";
 
-//Cells. Presentational components
 function StackedInfo({ topRow, bottomRow }) {
   return (
     <Flex direction="column" justify="center">
@@ -17,18 +35,56 @@ function StackedInfo({ topRow, bottomRow }) {
     </Flex>
   );
 }
+function UserPassword({ user, password }) {
+  const [show, setShow] = useState(false);
+  return (
+    <InputGroup>
+      <Flex direction="row" justify="center" gap="15px">
+        <Box
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <Text fontSize="md" fontWeight="600">
+            {user}
+          </Text>
+          <Input
+            type={show ? "text" : "password"}
+            fontSize="xs"
+            color="gray.900"
+            value={password}
+            readOnly // Ensure the input is read-only
+            variant="unstyled" // Remove default styling
+            userSelect="none"
+            px="20px"
+          />
+        </Box>
+        <Box>
+          <IconButton
+            zIndex="5000"
+            icon={show ? <FaEyeSlash /> : <FaEye />}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShow((s) => !s);
+            }}
+          />
+        </Box>
+      </Flex>
+    </InputGroup>
+  );
+}
 
-function StackedUserActivity({ author, date }) {
-  //TODO reformat the date.
+function CreatedModified({ author, date }) {
+  dayjs.locale(ja);
+  const formattedDate = dayjs(date).format("YYYY年 MMM D日 (dd)");
 
   return (
     <Flex direction="column">
-      {/* TODO This should navigate to the wsUser page */}
-      <Text fontSize="sm" fontWeight="700" color="gray.400">
+      <Text noOfLines={1} fontSize="sm" fontWeight="700" color="gray.400">
         {author}
       </Text>
-      <Text fontSize="xs" color="gray.500">
-        {date}
+      <Text noOfLines={1} fontSize="xs" color="gray.500">
+        {formattedDate}
       </Text>
     </Flex>
   );
@@ -46,10 +102,9 @@ function DisabledStatus({ isDisabled }) {
   return (
     <Flex align="center">
       <Icon
-        w="24px"
-        h="24px"
+        w="20px"
+        h="20px"
         opacity={0.8}
-        me="5px"
         color={!isDisabled ? "green.500" : "red.500"}
         as={!isDisabled ? MdCheckCircle : MdCancel}
       />
@@ -62,15 +117,129 @@ function DisabledStatus({ isDisabled }) {
 
 export const hqColumnsDefinition = [
   {
-    Header: "本部",
+    Header: "本部コード",
     accessor: "hqCd",
-    Cell: ({
-      value,
-      row: {
-        original: { hqCd, hqName },
-      },
-    }) => <StackedInfo topRow={hqName} bottomRow={hqCd} />,
+    Cell: ({ value }) => <StandardText text={value} />,
   },
+  {
+    Header: "本部名",
+    accessor: "hqName",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "メール",
+    accessor: "email",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "登録情報",
+    accessor: "createdAt",
+    Cell: ({
+      row: {
+        original: { createdBy, createdAt },
+      },
+    }) => <CreatedModified author={createdBy} date={createdAt} />,
+  },
+  {
+    Header: "更新情報",
+    accessor: "modifiedAt",
+    Cell: ({
+      row: {
+        original: { modifiedBy, modifiedAt },
+      },
+    }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
+  },
+  {
+    Header: "状態",
+    accesor: "disabled",
+    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+  },
+];
+
+export const storesColumnsDefinition = [
+  {
+    Header: "本部コード",
+    accessor: "hqCd",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "本部名",
+    accessor: "hqName",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "店舗コード",
+    accessor: "storeCd",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "店舗名",
+    accessor: "storeName",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "メール",
+    accessor: "email",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "FTP情報",
+    accessor: "ftpUser",
+    Cell: ({
+      row: {
+        original: { ftpUser, ftpPass },
+      },
+    }) => {
+      return <UserPassword user={ftpUser} password={ftpPass} />;
+    },
+  },
+  {
+    Header: "登録情報",
+    accessor: "createdBy",
+    Cell: ({
+      row: {
+        original: { createdBy, createdAt },
+      },
+    }) => <CreatedModified author={createdBy} date={createdAt} />,
+  },
+  {
+    Header: "更新情報",
+    accessor: "modifiedBy",
+    Cell: ({
+      row: {
+        original: { modifiedBy, modifiedAt },
+      },
+    }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
+  },
+  {
+    Header: "状態",
+    accesor: "disabled",
+    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+  },
+];
+
+export const usersColumnsDefinition = [
+  {
+    Header: "ユーザID",
+    accessor: "userId",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "ユーザ名",
+    accessor: "userName",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "ログインID",
+    accessor: "loginId",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "備考",
+    accessor: "note",
+    Cell: ({ value }) => <Text noOfLines={1}>{value}</Text>,
+  },
+
   {
     Header: "メール",
     accessor: "email",
@@ -83,7 +252,7 @@ export const hqColumnsDefinition = [
       row: {
         original: { createdBy, createdAt },
       },
-    }) => <StackedUserActivity author={createdBy} date={createdAt} />,
+    }) => <CreatedModified author={createdBy} date={createdAt} />,
   },
   {
     Header: "更新情報",
@@ -92,45 +261,54 @@ export const hqColumnsDefinition = [
       row: {
         original: { modifiedBy, modifiedAt },
       },
-    }) => <StackedUserActivity author={modifiedBy} date={modifiedAt} />,
+    }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
   },
   {
     Header: "状態",
     accesor: "disabled",
-    Cell: ({ row: { original } }) => (
-      <DisabledStatus isDisabled={original.disabled} />
-    ),
+    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
   },
 ];
 
-// cosas que hacer solo para una fk tabla.
-// TODO Hacer la definición de columnas de Stores
-// TODO Hacer la definición de columnas de Users
-// TODO Hacer la definición de columnas de AirSevices
+export const servicesColumnsDefinition = [
+  {
+    Header: "サービスID名",
+    accessor: "serviceId",
+    Cell: ({ value }) => <StandardText text={value} />,
+  },
+  {
+    Header: "サービス名",
+    accessor: "serviceName",
+    Cell: ({ value }) => {
+      return <StandardText text={value} />;
+    },
+  },
+  {
+    Header: "登録情報",
+    accessor: "createdBy",
+    Cell: ({
+      row: {
+        original: { createdBy, createdAt },
+      },
+    }) => <CreatedModified author={createdBy} date={createdAt} />,
+  },
+  {
+    Header: "更新情報",
+    accessor: "modifiedBy",
+    Cell: ({
+      row: {
+        original: { modifiedBy, modifiedAt },
+      },
+    }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
+  },
+  {
+    Header: "状態",
+    accesor: "disabled",
+    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+  },
+];
+
 // TODO Hacer la definición de columnas de wsUsers
-// TODO Hacer la definición de columnas de viewedBy, modifiedBy. Actividad por parte de WSUsers
+
 // TODO Investigar que onda con el filtrado de las páginas
 // TODO Crear una barra de búsqueda para buscar por cada tabla.
-// TODO Darle formato a las fechas con moment JS, o date-fns, o algo.
-
-//TODO Crear datos falsos para la tabla de Stores
-//TODO Crear datos falsos para la tabla de Users
-//TODO Crear datos falsos para la tabla de AirServices
-
-//TODO agregar un anchor a cada hilera según sea el caso.
-
-// TODO componentes dedicados al fetch para cada tabla.
-
-//TODO Refactor. Creo que  necesito definir componentes más peque
-// Note: Stores table definition:
-//storeCd int
-//hqCd int
-//StoreName
-//email
-//ftpUser
-//ftpPass
-//disabled
-//createdBy
-//createdAt
-//modifiedBy
-//modifiedAt

@@ -8,7 +8,9 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdFactory,
+  MdHomeRepairService,
 } from "react-icons/md";
+import {} from "react-icons/md";
 
 import { FaStoreAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
@@ -27,6 +29,7 @@ import AirHeadquarters from "pages/AirHeadquarters/AirHeadquarters";
 import AirUser from "pages/AirUser/AirUser";
 import AirUsers from "pages/AirUsers/AirUsers";
 import AirServices from "pages/AirServices/AirServices";
+import AirService from "pages/AirService/AirService";
 // import AirService from "pages/AirService/AirService";
 // import AirSettings from "pages/AirSettings/AirSettings";
 
@@ -62,7 +65,7 @@ const routes = [
     children: [
       {
         name: "店舗詳細",
-        path: "stores/:storeCd",
+        path: "stores/:hqCd/:storeCd",
         // component: <MainDashboard />,
         component: <AirStore />,
       },
@@ -78,16 +81,24 @@ const routes = [
       { name: "ユーザー詳細", path: "users/:userId", component: <AirUser /> },
     ],
   },
+
   {
     name: "サービス",
     path: "services",
-    icon: <Icon as={FaUsers} width="20px" height="20px" color="inherit" />,
+    icon: (
+      <Icon
+        as={MdHomeRepairService}
+        width="20px"
+        height="20px"
+        color="inherit"
+      />
+    ),
     component: <AirServices />,
     children: [
       {
         name: "サービス詳細",
-        path: "users/:serviceId",
-        component: <AirServices />,
+        path: "services/:serviceId",
+        component: <AirService />,
       },
     ],
   },

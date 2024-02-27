@@ -22,7 +22,7 @@
 */
 //TODO: Translate to japanese
 //TODO: separate into components and spread styles for readibility.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
@@ -40,6 +40,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { test } from "services/api/apiBase";
 // Custom components
 import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
@@ -226,6 +227,7 @@ export default function Login() {
               w="100%"
               h="50"
               mb="24px"
+              onClick={test}
             >
               サインイン
             </Button>

@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Flex,
+  LinkBox,
   LinkOverlay,
   // HStack,
   Table,
@@ -24,7 +25,7 @@ import { SearchBar } from "components/navbar/searchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 
 // Note: can we specify an uncompleted navigation? This way
-
+// TODO: Make the table rows smaller in height. Change the layout, fontSize, add columns, remove padding...
 export default function WebAirTable({
   tableTitle,
   columnsDefinition,
@@ -58,6 +59,23 @@ export default function WebAirTable({
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const navigate = useNavigate();
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsDragging(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // const handleButtonClick = (event) => {
+  //   if (!isDragging) {
+  //     // If not dragging, handle the button click
+  //     console.log("Button clicked");
+  //   }
+  // };
+
   const TableTitle = () => {
     return (
       <Text
@@ -70,14 +88,10 @@ export default function WebAirTable({
       </Text>
     );
   };
+  // TODO change the format of the dates!
 
   return (
-    <Card
-      direction="column"
-      w="100%"
-      px="0px"
-      overflowX={{ sm: "scroll", lg: "hidden" }}
-    >
+    <Card direction="column" w="100%" px="0px" overflowX={"scroll"}>
       <Flex px="25px" justify="space-between" mb="20px" align="center">
         <TableTitle />
         <SearchBar />
@@ -96,7 +110,7 @@ export default function WebAirTable({
                   <Flex
                     justify="space-between"
                     align="center"
-                    fontSize={{ sm: "10px", lg: "12px" }}
+                    fontSize={{ sm: "10px", lg: "13px" }}
                     color="gray.400"
                   >
                     {column.render("Header")}
@@ -115,17 +129,23 @@ export default function WebAirTable({
                   {...row.getRowProps()}
                   key={index}
                   style={{ cursor: "pointer" }}
+                  bg={index % 2 === 0 ? "transparent" : "secondaryGray.300"}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
                   onClick={() => {
                     navigate(linkGenerator(row));
                   }}
                 >
-                  {row.cells.map((cell, index) => (
+                  {row.cells.map((cell, cellIndex) => (
                     <Td
-                      key={index}
+                      key={cellIndex}
                       fontSize={{ sm: "14px" }}
                       minW={{ sm: "150px", md: "200px", lg: "auto" }}
                       borderColor="transparent"
                       color={textColor}
+                      // Note: Tackle this padding for greater scanability.
+                      paddingY="1px"
+                      paddingx="3px"
                       {...cell.getCellProps()}
                     >
                       {cell.render("Cell")}
