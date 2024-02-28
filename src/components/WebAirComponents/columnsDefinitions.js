@@ -117,198 +117,297 @@ function DisabledStatus({ isDisabled }) {
 
 export const hqColumnsDefinition = [
   {
-    Header: "本部コード",
-    accessor: "hqCd",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "hqCd",
+    header: "本部コード", // puede ser una función
+    accessorKey: "hqCd",
+    cell: ({
+      row: {
+        original: { hqCd },
+      },
+    }) => {
+      // Note: props puede aceptar: table, column, row, cell, getValue, renderValue
+      return <StandardText text={hqCd} />;
+    },
   },
   {
-    Header: "本部名",
-    accessor: "hqName",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "hqName",
+    header: "本部名",
+    accessorKey: "hqName",
+    cell: ({
+      row: {
+        original: { hqName },
+      },
+    }) => {
+      // Note: props puede aceptar: table, column, row, cell, getValue, renderValue
+      return <StandardText text={hqName} />;
+    },
   },
   {
-    Header: "メール",
-    accessor: "email",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "email",
+    header: "メール",
+    accessorKey: "email",
+    cell: ({
+      row: {
+        original: { email },
+      },
+    }) => {
+      // Note: props puede aceptar: table, column, row, cell, getValue, renderValue
+      return <StandardText text={email} />;
+    },
   },
   {
-    Header: "登録情報",
-    accessor: "createdAt",
-    Cell: ({
+    id: "createdAt",
+    header: "登録情報",
+    accessorKey: "createdAt",
+    cell: ({
       row: {
         original: { createdBy, createdAt },
       },
     }) => <CreatedModified author={createdBy} date={createdAt} />,
   },
   {
-    Header: "更新情報",
-    accessor: "modifiedAt",
-    Cell: ({
+    id: "modifiedAt",
+    header: "更新情報",
+    accessorKey: "modifiedAt",
+    cell: ({
       row: {
         original: { modifiedBy, modifiedAt },
       },
     }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
   },
   {
-    Header: "状態",
-    accesor: "disabled",
-    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+    id: "disabled",
+    header: "状態",
+    accessorKey: "disabled",
+    cell: ({ value }) => <DisabledStatus isDisabled={value} />,
   },
 ];
 
 export const storesColumnsDefinition = [
   {
-    Header: "本部コード",
-    accessor: "hqCd",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "hqCd",
+    header: "本部コード",
+    accessorKey: "hqCd",
+    cell: ({
+      row: {
+        original: { hqCd },
+      },
+    }) => <StandardText text={hqCd} />,
   },
   {
-    Header: "本部名",
-    accessor: "hqName",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "hqName",
+    header: "本部名",
+    accessorKey: "hqName",
+    cell: ({
+      row: {
+        original: { hqName },
+      },
+    }) => <StandardText text={hqName} />,
   },
   {
+    id: "storeCd",
     Header: "店舗コード",
     accessor: "storeCd",
-    Cell: ({ value }) => <StandardText text={value} />,
-  },
-  {
-    Header: "店舗名",
-    accessor: "storeName",
-    Cell: ({ value }) => <StandardText text={value} />,
-  },
-  {
-    Header: "メール",
-    accessor: "email",
-    Cell: ({ value }) => <StandardText text={value} />,
-  },
-  {
-    Header: "FTP情報",
-    accessor: "ftpUser",
-    Cell: ({
+    cell: ({
       row: {
-        original: { ftpUser, ftpPass },
+        original: { storeCd },
       },
-    }) => {
-      return <UserPassword user={ftpUser} password={ftpPass} />;
-    },
+    }) => <StandardText text={storeCd} />,
   },
   {
-    Header: "登録情報",
-    accessor: "createdBy",
-    Cell: ({
+    id: "storeName",
+    header: "店舗名",
+    accessorKey: "storeName",
+    cell: ({
+      row: {
+        original: { storeName },
+      },
+    }) => <StandardText text={storeName} />,
+  },
+  {
+    id: "email",
+    header: "メール",
+    accessorKey: "email",
+    cell: ({
+      row: {
+        original: { email },
+      },
+    }) => <StandardText text={email} />,
+  },
+  // {
+  //   id: "ftpUser",
+  //   header: "FTP情報",
+  //   accessorKey: "ftpUser",
+  //   cell: ({
+  //     row: {
+  //       original: { ftpUser, ftpPass },
+  //     },
+  //   }) => {
+  //     return <UserPassword user={ftpUser} password={ftpPass} />;
+  //   },
+  // },
+  {
+    id: "createdBy",
+    header: "登録情報",
+    accessorKey: "createdBy",
+    cell: ({
       row: {
         original: { createdBy, createdAt },
       },
     }) => <CreatedModified author={createdBy} date={createdAt} />,
   },
   {
-    Header: "更新情報",
-    accessor: "modifiedBy",
-    Cell: ({
+    id: "modifiedBy",
+    header: "更新情報",
+    accessorKey: "modifiedBy",
+    cell: ({
       row: {
         original: { modifiedBy, modifiedAt },
       },
     }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
   },
   {
-    Header: "状態",
-    accesor: "disabled",
-    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+    id: "disabled",
+    header: "状態",
+    accessorKey: "disabled",
+    cell: ({ row: { original: disabled } }) => (
+      <DisabledStatus isDisabled={disabled} />
+    ),
   },
 ];
 
 export const usersColumnsDefinition = [
   {
-    Header: "ユーザID",
-    accessor: "userId",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "userId",
+    header: "ユーザID",
+    accessorKey: "userId",
+    cell: ({
+      row: {
+        original: { userId },
+      },
+    }) => <StandardText text={userId} />,
   },
   {
-    Header: "ユーザ名",
-    accessor: "userName",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "userName",
+    header: "ユーザ名",
+    accessorKey: "userName",
+    cell: ({
+      row: {
+        original: { userName },
+      },
+    }) => <StandardText text={userName} />,
   },
   {
-    Header: "ログインID",
-    accessor: "loginId",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "loginId",
+    header: "ログインID",
+    accessorKey: "loginId",
+    cell: ({
+      row: {
+        original: { loginId },
+      },
+    }) => <StandardText text={loginId} />,
   },
   {
-    Header: "備考",
-    accessor: "note",
-    Cell: ({ value }) => <Text noOfLines={1}>{value}</Text>,
+    id: "note",
+    header: "備考",
+    accessorKey: "note",
+    cell: ({
+      row: {
+        original: { note },
+      },
+    }) => <Text noOfLines={1}>{note}</Text>,
   },
-
   {
-    Header: "メール",
-    accessor: "email",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "email",
+    header: "メール",
+    accessorKey: "email",
+    cell: ({
+      row: {
+        original: { email },
+      },
+    }) => <StandardText text={email} />,
   },
   {
-    Header: "登録情報",
-    accessor: "createdBy",
-    Cell: ({
+    id: "createdBy",
+    header: "登録情報",
+    accessorKey: "createdBy",
+    cell: ({
       row: {
         original: { createdBy, createdAt },
       },
     }) => <CreatedModified author={createdBy} date={createdAt} />,
   },
   {
-    Header: "更新情報",
-    accessor: "modifiedBy",
-    Cell: ({
+    id: "modifiedBy",
+    header: "更新情報",
+    accessorKey: "modifiedBy",
+    cell: ({
       row: {
         original: { modifiedBy, modifiedAt },
       },
     }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
   },
   {
-    Header: "状態",
-    accesor: "disabled",
-    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+    id: "disabled",
+    header: "状態",
+    accessorKey: "disabled",
+    cell: ({
+      row: {
+        original: { disabled },
+      },
+    }) => <DisabledStatus isDisabled={disabled} />,
   },
 ];
 
 export const servicesColumnsDefinition = [
   {
-    Header: "サービスID名",
-    accessor: "serviceId",
-    Cell: ({ value }) => <StandardText text={value} />,
+    id: "serviceId",
+    header: "サービスID名",
+    accessorKey: "serviceId",
+    cell: ({
+      row: {
+        original: { serviceId },
+      },
+    }) => <StandardText text={serviceId} />,
   },
   {
-    Header: "サービス名",
-    accessor: "serviceName",
-    Cell: ({ value }) => {
-      return <StandardText text={value} />;
+    id: "serviceName",
+    header: "サービス名",
+    accessorKey: "serviceName",
+    cell: ({
+      row: {
+        original: { serviceName },
+      },
+    }) => {
+      return <StandardText text={serviceName} />;
     },
   },
   {
-    Header: "登録情報",
-    accessor: "createdBy",
-    Cell: ({
+    id: "createdBy",
+    header: "登録情報",
+    accessorKey: "createdBy",
+    cell: ({
       row: {
         original: { createdBy, createdAt },
       },
     }) => <CreatedModified author={createdBy} date={createdAt} />,
   },
   {
-    Header: "更新情報",
-    accessor: "modifiedBy",
-    Cell: ({
+    id: "modifiedBy",
+    header: "更新情報",
+    accessorKey: "modifiedBy",
+    cell: ({
       row: {
         original: { modifiedBy, modifiedAt },
       },
     }) => <CreatedModified author={modifiedBy} date={modifiedAt} />,
   },
   {
-    Header: "状態",
-    accesor: "disabled",
-    Cell: ({ value }) => <DisabledStatus isDisabled={value} />,
+    header: "状態",
+    accessorKey: "disabled",
+    cell: ({ value }) => <DisabledStatus isDisabled={value} />,
   },
 ];
-
-// TODO Hacer la definición de columnas de wsUsers
 
 // TODO Investigar que onda con el filtrado de las páginas
 // TODO Crear una barra de búsqueda para buscar por cada tabla.
