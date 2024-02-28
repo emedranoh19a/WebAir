@@ -14,20 +14,26 @@ const config = {
 export async function test() {
   try {
     const response = await axios.get(`/api/headquarters/53`, config);
-    console.log(response.data);
+    console.log(response);
   } catch (error) {
     console.error(error);
   }
 }
 
 export async function getHeadquarters() {
+  const params = { page: 1, row: 0 };
   try {
-    const response = await axios.get(`/api/headquarters`, config);
-  } catch (error) {}
+    const response = await axios.get(`/api/headquarters/search`, {
+      ...config,
+      params,
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 // TODO agregar parámetros donde sea necesario.
 // TODO la prueba de fuego es /api/headquarters/search
-
 // Note: Informacion util
 // // https://rapidapi.com/guides/axios-tokens-cookies-auth
 
@@ -41,3 +47,5 @@ export async function getHeadquarters() {
 // Revisar setupProxy.js el target debería ser el url proveido.
 // Axios, por otra parte, debe empezar con /api. Luego, nos metemos con otras cosas
 // En realidad, tenía que leer cuidadosamente las especificaciones. Los headers no estaban bien definidos.
+//Solucion de paginación...
+//Crear el UI. con react table

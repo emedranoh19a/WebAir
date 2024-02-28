@@ -35,6 +35,7 @@ export default function WebAirTable({
   // Info: flexible by accepting column render definition and data.
   const columns = useMemo(() => columnsDefinition, [columnsDefinition]);
   const data = useMemo(() => tableData, [tableData]);
+  const defaultData = useMemo(() => [], []);
 
   const tableInstance = useTable(
     {
@@ -61,21 +62,6 @@ export default function WebAirTable({
   const navigate = useNavigate();
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleMouseDown = () => {
-    setIsDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // const handleButtonClick = (event) => {
-  //   if (!isDragging) {
-  //     // If not dragging, handle the button click
-  //     console.log("Button clicked");
-  //   }
-  // };
-
   const TableTitle = () => {
     return (
       <Text
@@ -88,8 +74,13 @@ export default function WebAirTable({
       </Text>
     );
   };
-  // TODO change the format of the dates!
-
+  //TODO declarar el rerender. para la definición de columnas.
+  // tODO luego atrapar la definición de columnas correspondiete.
+  //TODO Manejar el estado, que contenga pageIndex y pageSize.
+  // TODO usar React Query para obtener los datos. esto ya debería ser pan comido.
+  // TODO memoize the data.
+  // TODO extraer los hooks necesarios de react table.
+  //
   return (
     <Card direction="column" w="100%" px="0px" overflowX={"scroll"}>
       <Flex px="25px" justify="space-between" mb="20px" align="center">
@@ -130,8 +121,6 @@ export default function WebAirTable({
                   key={index}
                   style={{ cursor: "pointer" }}
                   bg={index % 2 === 0 ? "transparent" : "secondaryGray.300"}
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
                   onClick={() => {
                     navigate(linkGenerator(row));
                   }}
@@ -145,7 +134,7 @@ export default function WebAirTable({
                       color={textColor}
                       // Note: Tackle this padding for greater scanability.
                       paddingY="1px"
-                      paddingx="3px"
+                      paddingx="1px"
                       {...cell.getCellProps()}
                     >
                       {cell.render("Cell")}

@@ -35,6 +35,7 @@ import WebAirTable from "components/WebAirComponents/WebAirTable";
 import { hqColumnsDefinition } from "components/WebAirComponents/columnsDefinitions";
 
 import { hqData } from "components/WebAirComponents/hqMockData";
+import HeadquartersTable from "components/WebAirComponents/Tables/HeadquartersTable";
 
 export default function AirHeadquarters() {
   // Chakra Color Mode
@@ -50,13 +51,7 @@ export default function AirHeadquarters() {
       </Flex>
     </Flex>
   );
-  function linkGenerator(cell) {
-    const {
-      original: { hqCd },
-    } = cell;
 
-    return `/headquarters/${hqCd}`;
-  }
   return (
     <>
       {/* TODO falta hacer un submit al presionar "Enter" */}
@@ -67,12 +62,7 @@ export default function AirHeadquarters() {
         display={{ base: "block", xl: "grid" }}
       >
         <TableContainer>
-          <WebAirTable
-            tableTitle="全ての本部"
-            columnsDefinition={hqColumnsDefinition}
-            tableData={hqData}
-            linkGenerator={linkGenerator}
-          />
+          <HeadquartersTable />
         </TableContainer>
         <Drawer>
           <Drawer.Open>

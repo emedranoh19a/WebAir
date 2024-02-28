@@ -40,16 +40,15 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { test } from "services/api/apiBase";
-// Custom components
+// Custom components and assets
 import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
-// Assets
 import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 
+import { test, getHeadquarters } from "services/api/apiBase";
 function useStyleValues() {
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -227,7 +226,7 @@ export default function Login() {
               w="100%"
               h="50"
               mb="24px"
-              onClick={test}
+              onClick={getHeadquarters}
             >
               サインイン
             </Button>
@@ -238,3 +237,13 @@ export default function Login() {
   );
 }
 // Note: To view the previous version of this JSX, check views/auth/signin/index.js
+//Angela Yu:
+//148 APIs,
+//77 Build you own API,
+//22 Databases
+// 36 SQL
+// 276 PostgreSQL
+// Book Notes!
+// 176 Authentication and Security
+
+// Use a Public API
